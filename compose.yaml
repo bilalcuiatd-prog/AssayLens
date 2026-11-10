@@ -1,0 +1,13 @@
+services:
+  assaylens:
+    build: .
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:8000:8000"
+    environment:
+      ASSAYLENS_DATA_DIR: /srv/assaylens/workspace
+    volumes:
+      - assaylens-data:/srv/assaylens/workspace
+    mem_limit: 4g
+volumes:
+  assaylens-data:

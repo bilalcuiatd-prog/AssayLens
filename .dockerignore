@@ -1,0 +1,14 @@
+.git
+.venv
+__pycache__/
+*.pyc
+.pytest_cache/
+workspace/
+assaylens_workspace/
+*.zip
+.env
+.env.*
+*.log
+notebooks/
+tests/
+docs/

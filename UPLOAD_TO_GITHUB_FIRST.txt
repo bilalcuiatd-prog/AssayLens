@@ -1,0 +1,25 @@
+ASSAYLENS COMPLETE SOURCE — RENDER DEPLOYMENT FIX
+
+1. Extract this ZIP.
+2. Open the extracted folder.
+3. Upload its CONTENTS to your GitHub AssayLens_AI repository.
+   Do NOT upload the ZIP itself or add a second AssayLens_AI folder.
+4. At the TOP LEVEL of GitHub you must see:
+   requirements.txt, Dockerfile, render_app.py, render.yaml,
+   assaylens/, web/, scripts/, examples/.
+5. In Render > Settings > Build > Source > Edit, choose Python 3
+   (recommended) or keep Docker with the corrected Dockerfile.
+6. For Python 3 use:
+   Build: pip install --no-cache-dir -r requirements.txt && python scripts/verify_deploy.py
+   Start: uvicorn render_app:app --host 0.0.0.0 --port $PORT --workers 1
+7. Set Render environment variables:
+   PYTHON_VERSION=3.11.11
+   ASSAYLENS_SITE_USERNAME=your_chosen_username
+   ASSAYLENS_SITE_PASSWORD=your_private_unique_password
+8. Deploy latest commit. /healthz should show {"status":"ok"};
+   your website should ask for HTTP Basic authentication.
+
+Read GITHUB_RENDER_START_HERE.md for the full instructions.
+
+DO NOT upload any .venv, workspace, private datasets, or secrets.
+The free hosting option is for lightweight private demos, not heavy experiments.
