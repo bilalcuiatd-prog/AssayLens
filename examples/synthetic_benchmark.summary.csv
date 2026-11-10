@@ -1,0 +1,9 @@
+,,rmse,rmse,rmse,mae,mae,mae,r2,r2,r2,coverage,coverage,coverage,mean_interval_width,mean_interval_width,mean_interval_width,ood_coverage,ood_coverage,ood_coverage,in_domain_coverage,in_domain_coverage,in_domain_coverage,ood_mae,ood_mae,ood_mae
+,,mean,std,count,mean,std,count,mean,std,count,mean,std,count,mean,std,count,mean,std,count,mean,std,count,mean,std,count
+split,variant,,,,,,,,,,,,,,,,,,,,,,,,
+assay,chemistry_assay,0.3647,0.0056,2,0.2965,0.0002,2,0.0415,0.0869,2,0.8882,0.1183,2,1.235,0.3747,2,0.8819,0.0098,2,0.8907,0.1318,2,0.322,0.0924,2
+assay,chemistry_assay_weighted,0.3754,0.0172,2,0.303,0.012,2,-0.0182,0.1536,2,0.8984,0.0839,2,1.2638,0.3182,2,0.8819,0.0098,2,0.9016,0.0935,2,0.3497,0.1279,2
+assay,chemistry_only,0.3815,0.0015,2,0.3178,0.0095,2,-0.047,0.0547,2,0.9169,0.0776,2,1.3225,0.2962,2,0.8819,0.0098,2,0.9223,0.0871,2,0.305,0.08,2
+scaffold,chemistry_assay,0.4644,0.012,2,0.3742,0.0104,2,-0.2569,0.0572,2,0.9686,0.0219,2,1.8024,0.1065,2,1.0,,1,0.9684,0.0216,2,0.3625,,1
+scaffold,chemistry_assay_weighted,0.4815,0.0734,2,0.393,0.0589,2,-0.3657,0.4034,2,0.9374,0.0661,2,1.8652,0.1373,2,1.0,,1,0.9371,0.0657,2,0.4079,,1
+scaffold,chemistry_only,0.4468,0.081,2,0.365,0.0807,2,-0.184,0.4292,2,0.9843,0.0002,2,2.0164,0.0164,2,1.0,,1,0.984,0.0005,2,0.3942,,1

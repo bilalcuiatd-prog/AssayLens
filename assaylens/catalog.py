@@ -1,0 +1,56 @@
+from __future__ import annotations
+
+CATALOG = [
+    ("ACHE", "P22303", "Alzheimer", "Cholinergic signaling"),
+    ("BCHE", "P06276", "Alzheimer", "Cholinergic signaling"),
+    ("BACE1", "P56817", "Alzheimer", "Amyloid processing"),
+    ("BACE2", "Q9Y5Z0", "Alzheimer", "Amyloid processing"),
+    ("GSK3B", "P49841", "Alzheimer|Parkinson", "Protein phosphorylation"),
+    ("GSK3A", "P49840", "Alzheimer", "Protein phosphorylation"),
+    ("CDK5", "Q00535", "Alzheimer", "Neuronal kinase"),
+    ("DYRK1A", "Q13627", "Alzheimer", "Protein phosphorylation"),
+    ("MAPK14", "Q16539", "Alzheimer", "Stress response"),
+    ("PDE4D", "Q08499", "Alzheimer", "Cyclic nucleotide signaling"),
+    ("PDE9A", "O76083", "Alzheimer", "Cyclic nucleotide signaling"),
+    ("MME", "P08473", "Alzheimer", "Peptide clearance"),
+    ("IDE", "P14735", "Alzheimer", "Peptide clearance"),
+    ("ADAM10", "O14672", "Alzheimer", "Proteolytic processing"),
+    ("ADAM17", "P78536", "Alzheimer", "Proteolytic processing"),
+    ("LGMN", "Q99538", "Alzheimer", "Lysosomal protease"),
+    ("CASP3", "P42574", "Alzheimer", "Proteolysis / apoptosis"),
+    ("CASP6", "P55212", "Alzheimer", "Proteolysis / apoptosis"),
+    ("HDAC6", "Q9UBN7", "Alzheimer|Parkinson", "Protein homeostasis"),
+    ("MTOR", "P42345", "Alzheimer", "Nutrient signaling"),
+    ("OGA", "O60502", "Alzheimer", "O-GlcNAc turnover"),
+    ("MAOB", "P27338", "Parkinson", "Monoamine metabolism"),
+    ("MAOA", "P21397", "Parkinson", "Monoamine metabolism"),
+    ("COMT", "P21964", "Parkinson", "Catecholamine metabolism"),
+    ("LRRK2", "Q5S007", "Parkinson", "Kinase signaling"),
+    ("GBA1", "P04062", "Parkinson", "Lysosomal activity"),
+    ("PINK1", "Q9BXM7", "Parkinson", "Mitochondrial quality control"),
+    ("PRKN", "O60260", "Parkinson", "Ubiquitin transfer"),
+    ("DDC", "P20711", "Parkinson", "Dopamine biosynthesis"),
+    ("TH", "P07101", "Parkinson", "Dopamine biosynthesis"),
+    ("DBH", "P09172", "Parkinson", "Catecholamine biosynthesis"),
+    ("GCH1", "P30793", "Parkinson", "Pterin biosynthesis"),
+    ("PLA2G6", "O60733", "Parkinson", "Phospholipid metabolism"),
+    ("USP30", "Q70CQ3", "Parkinson", "Mitophagy signaling"),
+    ("USP14", "P54578", "Parkinson", "Protein turnover"),
+    ("SIRT2", "Q8IXJ6", "Parkinson", "Protein deacetylation"),
+    ("PDE10A", "Q9Y233", "Parkinson", "Cyclic nucleotide signaling"),
+    ("GBA2", "Q9HCG7", "Parkinson", "Glycosidase activity"),
+    ("CTSD", "P07339", "Parkinson", "Lysosomal proteolysis"),
+    ("CTSB", "P07858", "Parkinson", "Lysosomal proteolysis"),
+    ("FAAH", "O00519", "Parkinson", "Lipid signaling"),
+    ("NQO1", "P15559", "Parkinson", "Redox homeostasis"),
+    ("CA2", "P00918", "Reference", "Carbonic anhydrase activity"),
+    ("EGFR", "P00533", "Reference", "Receptor kinase"),
+    ("DPP4", "P27487", "Reference", "Peptidase activity"),
+    ("PDE5A", "O76074", "Reference", "Cyclic nucleotide signaling"),
+]
+TARGETS = [
+    {"gene": gene, "accession": acc, "diseases": diseases.split("|"), "pathway": pathway}
+    for gene, acc, diseases, pathway in CATALOG
+]
+BY_GENE = {r["gene"]: r for r in TARGETS}
+assert len(BY_GENE) == len(TARGETS)

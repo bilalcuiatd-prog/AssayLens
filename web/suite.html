@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>AssayLens | Molecular Research Workbench</title>
+<style>
+:root{color-scheme:dark;--bg:#08121c;--nav:#0b1925;--panel:#102230;--panel2:#152b3a;--line:#254050;--text:#e8f2f6;--muted:#94acba;--aqua:#46d5bd;--blue:#789afa;--orange:#f5be7a;--bad:#ff8e99;--shadow:0 16px 50px #0003;font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;font-synthesis:none}
+*{box-sizing:border-box}html,body{margin:0;min-height:100%;background:var(--bg);color:var(--text)}a{color:var(--aqua);text-decoration:none}button,input,select,textarea{font:inherit}button{cursor:pointer}button:disabled{opacity:.5;cursor:not-allowed}.layout{display:flex;min-height:100vh}.sidebar{position:sticky;top:0;height:100vh;flex:0 0 255px;display:flex;flex-direction:column;padding:27px 17px;background:var(--nav);border-right:1px solid var(--line)}.brand{display:flex;align-items:center;gap:11px;padding:2px 10px 24px}.mark{width:37px;height:37px;display:grid;place-items:center;border-radius:12px;color:#042e35;background:linear-gradient(135deg,#56efcb,#7da9ff);font-weight:900;font-size:24px}.brand-name{font-weight:800;font-size:20px;letter-spacing:-.8px}.brand-sub{font-size:9px;letter-spacing:2px;font-weight:750;color:#91d2d4}.nav-caption{font-weight:750;color:#738f9c;letter-spacing:1.6px;font-size:10px;padding:18px 13px 7px}.nav{display:flex;flex-direction:column;gap:5px}.nav button{text-align:left;padding:12px 14px;border:1px solid transparent;background:transparent;color:#acc0cb;border-radius:10px;display:flex;align-items:center;gap:13px;font-size:13px;font-weight:630}.nav button:hover,.nav button.active{background:#183648;color:white;border-color:#345b6b}.nav button.active{box-shadow:inset 3px 0 var(--aqua)}.nav .nicon{width:18px;text-align:center;font-size:17px}.sidebottom{margin-top:auto;background:#132a39;border:1px solid #294454;padding:14px;border-radius:13px}.sidebottom .little{font-size:10px;letter-spacing:1px;color:var(--aqua);font-weight:800}.sidebottom p{margin:8px 0 0;font-size:12px;line-height:1.6;color:#b4cbd2}.content{flex:1;min-width:0;padding:25px clamp(18px,3.1vw,52px) 55px;max-width:1800px;margin:0 auto}.topbar{display:flex;align-items:center;justify-content:space-between;gap:10px;padding-bottom:22px;margin-bottom:24px;border-bottom:1px solid #203b4b}.breadcrumbs{font-size:11px;font-weight:750;letter-spacing:1px;color:#829dad}.breadcrumbs span{color:var(--aqua)}.pill{padding:7px 12px;font-size:11px;border:1px solid #355565;border-radius:999px;color:#b3d9d9;background:#112c36}.dot{display:inline-block;width:7px;height:7px;background:#43dfa8;border-radius:50%;margin-right:8px}.dot.off{background:var(--bad)}.page{display:none;animation:appear .25s ease}.page.active{display:block}@keyframes appear{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}h1{letter-spacing:-1.4px;font-size:clamp(26px,3vw,40px);line-height:1.19;margin:0 0 12px}h2{margin:0;font-size:18px;letter-spacing:-.4px}h3{margin:0;font-size:14px}p{line-height:1.6}.lead{font-size:14px;color:#a4bdc8;max-width:700px;margin:0 0 28px}.hero{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(220px,.7fr);gap:22px;min-height:190px;border:1px solid #33566a;border-radius:20px;background:radial-gradient(ellipse at 83% 12%,#275462 0,#112a3a 45%,#0d2230 95%);padding:30px;overflow:hidden;box-shadow:var(--shadow)}.hero h1{font-size:clamp(28px,3vw,40px)}.hero p{margin:12px 0 23px;color:#b4ced5;font-size:13px;max-width:510px}.molecule{position:relative;min-height:150px;opacity:.88}.molecule svg{width:100%;height:100%;max-height:180px}.actions{display:flex;flex-wrap:wrap;gap:10px}.btn{background:linear-gradient(125deg,#34c5ad,#2caa9b);border:1px solid #55d6c2;color:#041b22;padding:11px 17px;font-weight:750;border-radius:9px;font-size:12px}.btn:hover{filter:brightness(1.11)}.btn.secondary{background:#203948;color:#e5f2f5;border-color:#426070}.btn.ghost{background:transparent;color:#d0e5e7;border-color:#456170}.btn.small{padding:8px 11px;font-size:11px}.summary{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin:19px 0 30px}.stat{padding:19px;border:1px solid var(--line);background:var(--panel);border-radius:15px;min-height:114px}.stat small{display:block;color:#94abb6;font-size:11px}.stat strong{display:block;font-size:29px;margin:10px 0 4px;letter-spacing:-1px}.stat span{font-size:10px;color:var(--aqua)}.grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}.grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}.panel{padding:23px;background:var(--panel);border:1px solid var(--line);border-radius:17px;min-width:0}.panel-head{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:21px}.panel p,.note{font-size:12px;color:var(--muted)}.panel .eyebrow,.eyebrow{display:block;color:var(--aqua);font-size:10px;font-weight:850;letter-spacing:1.9px;margin:0 0 12px}.feature{background:#152d3b;border:1px solid #2b4d59;border-radius:12px;padding:17px}.feature .big{font-size:23px;margin-bottom:14px}.feature p{margin:7px 0 0;font-size:12px;color:#a1b7c3}.section-heading{display:flex;justify-content:space-between;align-items:flex-end;gap:14px;margin:29px 0 18px}.section-heading p{margin:7px 0 0;color:var(--muted);font-size:12px}.field{display:flex;flex-direction:column;gap:7px;min-width:0}.field label{font-size:11px;color:#b7ccd3;font-weight:650}.field input,.field select,.field textarea{min-height:39px;background:#0b1b28;border:1px solid #365362;border-radius:9px;color:var(--text);padding:9px 10px;outline:none;max-width:100%}.field input:focus,.field select:focus,.field textarea:focus{border-color:var(--aqua)}input[type=file]{font-size:11px}.formrow{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-bottom:14px}.formrow.two{grid-template-columns:repeat(2,minmax(0,1fr))}.formrow.four{grid-template-columns:repeat(4,minmax(0,1fr))}.form-actions{display:flex;flex-wrap:wrap;gap:9px;align-items:center;margin-top:18px}.tablebox{overflow-x:auto;border:1px solid var(--line);border-radius:12px}table{width:100%;border-collapse:collapse;min-width:620px;text-align:left}th{background:#182e3c;color:#96b4be;font-size:10px;text-transform:uppercase;letter-spacing:.8px}td{font-size:12px;color:#d2e3e8}th,td{padding:12px 13px;border-bottom:1px solid #294554}tr:last-child td{border-bottom:none}tr:hover td{background:#1b3544}.tag{display:inline-block;padding:4px 8px;border:1px solid #355866;border-radius:6px;background:#183542;color:#90dcd1;font-size:10px}.text-muted{color:var(--muted)}.status{white-space:pre-wrap;overflow-wrap:anywhere;margin-top:15px;background:#0a1a27;border:1px solid #2b5263;border-radius:9px;padding:12px 14px;line-height:1.6;color:#bcd9df;font-size:11px;max-height:250px;overflow:auto}.status.error{color:#ffb1ba;border-color:#80444f}.status.ok{border-color:#287b70;color:#95ead4}.choices{display:flex;flex-wrap:wrap;gap:8px}.choice{display:inline-flex;align-items:center;gap:7px;background:#132e3d;border:1px solid #3a5766;padding:8px 10px;border-radius:8px;font-size:11px;color:#d0e5e8}.choice input{accent-color:#45d8c5}.choice:has(input:checked){background:#1c4b4b;border-color:#4dbfaa}.option-area{background:#0d202d;padding:14px;border:1px solid #2e4d5d;border-radius:11px;margin-top:11px}.target-list{max-height:280px;overflow-y:auto;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.target-list label{display:flex;gap:9px;align-items:center;border-radius:9px;background:#183040;border:1px solid #294d5d;padding:10px;font-size:11px;cursor:pointer}.target-list input{accent-color:var(--aqua)}.subtitle{font-size:11px;color:#a6c1cd}.rule{border-top:1px solid #2d4856;margin:19px 0}.callout{border-left:3px solid #d6aa64;background:#292d30;padding:12px 15px;color:#e0d8bc;border-radius:0 8px 8px 0;font-size:12px}.kicker{font-size:10px;color:#a0c8cc;letter-spacing:1.6px;font-weight:800}.viewer{height:350px;background:linear-gradient(135deg,#0b1925,#112b37);border:1px solid #335363;border-radius:14px;position:relative;overflow:hidden;display:grid;place-items:center;color:#a4beca}.viewer canvas{outline:none}.viewer-msg{text-align:center;padding:15px;max-width:300px;font-size:13px;line-height:1.7}.metric-emphasis{color:var(--aqua);font-weight:700}.mini-select{max-width:270px}.foot{margin-top:40px;border-top:1px solid #294352;padding-top:18px;color:#7d9aa7;font-size:11px}.hidden{display:none!important}code{font-size:11px;color:#b9e7df}pre{white-space:pre-wrap;overflow:auto;font-size:11px;padding:14px;border-radius:10px;background:#091824;border:1px solid #254353;line-height:1.6}.help{font-size:11px;color:#84cfc9}.statusline{display:flex;align-items:center;gap:9px;flex-wrap:wrap}.result-chart{width:100%;max-height:540px;object-fit:contain;border-radius:11px;background:#0b1c28}
+@media(max-width:1150px){.sidebar{flex-basis:220px}.grid3{grid-template-columns:repeat(2,minmax(0,1fr))}.summary{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(max-width:760px){.layout{display:block}.sidebar{position:relative;width:100%;height:auto;padding:10px 15px}.brand{padding:7px}.sidebottom,.nav-caption{display:none}.nav{display:flex;flex-direction:row;overflow:auto}.nav button{white-space:nowrap;padding:9px}.content{padding:22px 15px}.hero{grid-template-columns:1fr}.hero .molecule{display:none}.grid2,.grid3,.formrow,.formrow.two,.formrow.four{grid-template-columns:1fr}.summary{grid-template-columns:repeat(2,minmax(0,1fr))}.target-list{grid-template-columns:1fr}}
+
+.pair-highlight{border-color:#396a6b;background:linear-gradient(135deg,#102f3a,#112431)}
+.pair-statbar{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:16px 0}
+.pair-statbar>div{padding:14px;border:1px solid var(--line);border-radius:11px;background:#132b38}
+.pair-statbar strong{font-size:23px;display:block;color:#a7eade}
+.pair-statbar small{color:var(--muted);font-size:10px}
+.pair-graph{height:360px;background:#0b1b28;border:1px solid #294d5d;border-radius:14px;display:flex;align-items:center;justify-content:center}
+.pair-graph svg{width:100%;height:100%}
+.pair-graph .edge{stroke:#517a88;stroke-opacity:.32;stroke-width:1.2}
+.pair-graph .node{fill:#44d3bd;stroke:#123b46;stroke-width:1.2}
+.pair-graph text{fill:#b5d7df;font-size:9px}
+.pair-graph-caption{color:#7aa7b3;font-size:11px;margin-top:6px}
+@media(max-width:760px){.pair-statbar{grid-template-columns:repeat(2,1fr)}}
+
+.brand-logo{width:45px;height:45px;flex:none;filter:drop-shadow(0 5px 12px rgba(45,199,176,.12))}
+.hub-tabs{display:flex;gap:8px;flex-wrap:wrap;margin:16px 0 24px}
+.hub-tabs button{border:1px solid #365362;background:#102635;color:#c0d7dc;padding:12px 21px;border-radius:11px;font-size:12px;font-weight:750}
+.hub-tabs button.active{color:#071a23;background:#61e1cc;border-color:#61e1cc}
+.source-card{border:1px solid #2c4a5b;background:linear-gradient(155deg,#152c3a,#102331);padding:19px;border-radius:15px;display:flex;flex-direction:column;gap:12px;min-height:240px}
+.source-card header{display:flex;align-items:flex-start;justify-content:space-between;gap:14px}
+.source-card h3{font-size:15px;line-height:1.5;margin:0;color:#f3fcff}
+.source-card .description{font-size:12px;color:#a7bdc8;line-height:1.65;flex:1}
+.source-card footer{display:flex;align-items:center;gap:12px;justify-content:space-between;flex-wrap:wrap}
+.source-card .source-tag{font-size:9px;font-weight:800;letter-spacing:.8px;color:#9ddacb;background:#133b44;border:1px solid #2c6268;border-radius:8px;padding:6px 8px}
+.source-card button{padding:9px 12px}
+.hub-model{background:#112736;border:1px solid #2e4c5d;border-radius:14px;padding:17px}
+.hub-code{font-size:11px;color:#c9e7ed;background:#081620;border:1px solid #234257;border-radius:9px;padding:12px;white-space:pre-wrap;overflow:auto}
+@media(max-width:760px){.source-card{min-height:auto}}
+</style>
+<style>
+.brand-logo{display:block;width:100%;height:124px;object-fit:contain;object-position:center}
+
+:root{
+  --bg:#071928;--nav:#061c30;--panel:#10283b;--panel2:#163449;
+  --line:#2b4d60;--text:#f2f8fc;--muted:#afc4d0;
+  --aqua:#65e0c0;--blue:#7079ff;--orange:#eec38b;
+  --bad:#ff96a1;--shadow:0 18px 50px rgba(1,16,28,.25);
+}
+html,body{background:var(--bg);color:var(--text)}
+.sidebar{
+  flex-basis:253px;
+  padding:18px 13px 16px;
+  background:linear-gradient(174deg,#092a47 0%,#061d31 54%,#051827 100%);
+  border-right:1px solid #22445b;
+}
+.sidebar .brand{display:flex;flex-direction:column;gap:11px;padding:2px 2px 14px;align-items:stretch}
+.brand-plate{background:#ffffff;border-radius:15px;padding:5px 7px;border:1px solid #d6e6e9;box-shadow:0 7px 30px #0003;overflow:hidden}
+.brand-logo{height:118px;width:100%;max-width:100%;object-fit:contain;object-position:center}
+.brand-caption{color:#8cd9ce;letter-spacing:2.3px;font-size:9px;font-weight:850;text-align:center}
+.sidebar .nav-caption{color:#9dbbd2;font-size:9px;padding:9px 11px 10px}
+.sidebar .nav{flex:1;min-height:0;overflow-y:auto;scrollbar-width:thin;scrollbar-color:#355a69 transparent;gap:3px}
+.sidebar .nav button{border-radius:10px;min-height:41px;padding:10px 12px;transition:background .16s,border-color .16s;color:#bfced8}
+.sidebar .nav button:hover{background:#163e53;color:#fff}
+.sidebar .nav button.active{background:linear-gradient(90deg,rgba(4,174,139,.28),rgba(14,112,125,.13));color:#b0f6df;border-color:#287e75;box-shadow:inset 3px 0 #1bce9e}
+.sidebar .sidebottom{margin-top:13px;padding:12px 13px;background:#102c3e;border-color:#315161}
+.sidebar .sidebottom .little{color:#6ee5c4}
+.sidebar .sidebottom p{color:#9dbbc7;font-size:11px;margin-top:5px}
+.content{padding:25px clamp(21px,3.2vw,56px) 58px}
+.topbar{border-color:#294454;margin-bottom:27px}
+.hero{background:radial-gradient(ellipse at 91% 0%,rgba(11,167,130,.25),transparent 56%),linear-gradient(110deg,#0d2d46,#103449 70%,#0a3340);border-color:#33736c;box-shadow:0 15px 40px #00111d5c}
+.hero h1{letter-spacing:-1.25px}
+.hero .eyebrow,.eyebrow,.metric-emphasis{color:#85ebc8}
+.btn{background:linear-gradient(120deg,#00ad88,#16d1a5);border-color:#3be4b8;color:#032c2c}
+.btn.secondary{background:#1a3a51;color:#ecf7f7;border-color:#3d6a7d}
+.btn.ghost{color:#dcf5ee}
+.panel,.stat{box-shadow:0 5px 22px rgba(0,11,23,.13)}
+.panel{background:#10283a;border:1px solid #294a5a}
+.stat{background:linear-gradient(160deg,#122d40,#102539);border-color:#305164}
+.stat strong{color:#f6fbfd}
+.pill{border-color:#42716d;background:#10393d;color:#d1f2e6}
+.dot{background:#1cd99b}
+.status.ok{border-color:#358e76}
+.field input:focus,.field select:focus,.field textarea:focus{box-shadow:0 0 0 3px rgba(36,207,168,.13)}
+.choice input,input[type=checkbox]{accent-color:#0bbf99}
+.page.active{animation:appear .18s ease}
+@media(max-width:760px){
+  .sidebar{width:100%;height:auto;position:relative;flex-basis:auto;padding:10px 15px 13px}
+  .sidebar .brand{display:flex;flex-direction:row;align-items:center;justify-content:space-between;padding:0 0 10px}
+  .brand-plate{width:157px;min-width:157px;padding:0 4px;border-radius:9px}
+  .brand-logo{height:79px}
+  .brand-caption{font-size:8px;max-width:135px;line-height:1.4}
+  .sidebar .nav{overflow-x:auto;overflow-y:hidden;max-height:none}
+  .sidebar .nav button{white-space:nowrap}
+  .content{padding:20px 15px}
+}
+
+</style></head><body><div class="layout">
+<aside class="sidebar"><div class="brand"><div class="brand-plate"><img src="/assets/assaylens-logo-original.png" class="brand-logo" alt="AssayLens — molecular lens logo"></div><div class="brand-caption">RESEARCH WORKBENCH</div></div>
+<div class="nav-caption">DISCOVERY & ANALYSIS</div><nav class="nav">
+<button class="active" data-page="overview"><span class="nicon">◫</span>Overview</button>
+<button data-page="datasets"><span class="nicon">◈</span>Dataset explorer</button>
+<button data-page="experiments"><span class="nicon">▦</span>Model laboratory</button>
+<button data-page="hub"><span class="nicon">▣</span>Research dataset hub</button>
+<button data-page="dti"><span class="nicon">◉</span>DTI cold-start</button>
+<button data-page="ddi"><span class="nicon">◎</span>Drug–drug networks</button>
+<button data-page="ppi"><span class="nicon">⌁</span>Protein interactome</button>
+<button data-page="custom"><span class="nicon">⌘</span>Custom Python models</button>
+<button data-page="docking"><span class="nicon">⬡</span>Structural docking</button>
+<button data-page="results"><span class="nicon">▤</span>Results & exports</button>
+</nav><div class="sidebottom"><div class="little">LOCAL RESEARCH INSTANCE</div><p>Auditable molecular modeling, interaction evidence and reproducible validation.</p></div></aside>
+<main class="content"><div class="topbar"><div class="breadcrumbs">RESEARCH WORKSPACE / <span id="crumb">OVERVIEW</span></div><div class="pill"><span class="dot" id="conn-dot"></span><span id="conn-text">Connecting to server…</span></div></div>
+<section id="page-overview" class="page active">
+<div class="hero"><div><span class="eyebrow">ASSAYLENS / MOLECULAR RESEARCH</span><h1>From molecular evidence<br>to interaction networks.</h1><p>Curate molecular activity and interaction evidence; compare DTI, DDI and PPI prediction under auditable cold-start protocols, repeated cross-validation and network analysis.</p><div class="actions"><button class="btn" data-open="hub">Explore interaction datasets &nbsp;↗</button><button class="btn secondary" data-open="experiments">Design an experiment</button></div></div><div class="molecule"><svg viewBox="0 0 250 190" fill="none" xmlns="http://www.w3.org/2000/svg"><g stroke="#4cb7bb" stroke-width="3" opacity=".82"><path d="M30 88L75 60 119 84 121 136 76 162 30 136Z"/><path d="M119 84L164 55 207 80 206 132 164 156 121 136"/><path d="M75 60V15L119 -10M164 55L165 11 207 -16"/><path d="M207 80L242 57"/></g><g fill="#7ce8d3"><circle cx="30" cy="88" r="7"/><circle cx="119" cy="84" r="7"/><circle cx="206" cy="132" r="8"/><circle cx="75" cy="15" r="8"/></g><g fill="#88a8ff"><circle cx="207" cy="80" r="9"/><circle cx="164" cy="156" r="7"/><circle cx="75" cy="162" r="6"/></g></svg></div></div>
+<div class="summary"><div class="stat"><small>Curated datasets</small><strong id="dash-datasets">—</strong><span>Upload or retrieve</span></div><div class="stat"><small>Completed evaluations</small><strong id="dash-runs">—</strong><span>With reproducibility exports</span></div><div class="stat"><small>Catalog targets</small><strong id="dash-targets">—</strong><span>Plus unrestricted protein search</span></div><div class="stat"><small>Model families</small><strong id="dash-models">—</strong><span>Built-in + custom model interface</span></div></div>
+<div class="section-heading"><div><h2>Research capabilities</h2><p>Full experimental lifecycle with explicit provenance and methodological constraints.</p></div></div>
+<div class="grid3"><div class="feature"><div class="big">◈</div><h3>Data provenance</h3><p>Retrieve ChEMBL records across human single-protein targets, or upload harmonized CSVs.</p></div><div class="feature"><div class="big">▦</div><h3>Model evaluation</h3><p>Binary classification and regression, 2–10 group-disjoint folds, multiple seeds and controlled feature ablations.</p></div><div class="feature"><div class="big">⬡</div><h3>Structure workspace</h3><p>3D conformer generation, PDB visualization and optional AutoDock Vina docking using prepared PDBQT inputs.</p></div></div>
+<div class="section-heading"><div><h2>Scientific safeguards</h2><p>Checks that must survive source scrutiny before publication.</p></div></div><div class="panel"><div class="grid3"><div><h3>No fabricated assay identifiers</h3><p>Assay-group CV is rejected when genuine assay identifiers are missing.</p></div><div><h3>Separate evaluation groups</h3><p>Use scaffold, compound or assay groups; archive predictions, fold metrics and run settings.</p></div><div><h3>Docking is not affinity</h3><p>Docking scores are approximations; structure preparation and experimental verification remain essential.</p></div></div></div>
+</section>
+<section id="page-datasets" class="page"><span class="eyebrow">DATA INTEGRITY / MOLECULAR EVIDENCE</span><h1>Dataset explorer</h1><p class="lead">Browse the curated disease panel or discover any human single-protein target from ChEMBL. Each target and endpoint is processed separately.</p>
+<div class="grid2"><div class="panel"><div class="panel-head"><h2>Search protein targets</h2><span class="tag">ChEMBL API</span></div><div class="field"><label>Protein name, gene, or accession</label><input id="protein-search" placeholder="e.g., carbonic anhydrase, HDAC, kinase"></div><div class="form-actions"><button class="btn" id="protein-search-btn">Search database</button><span class="note">Human single-protein records</span></div><div id="search-target-results" class="status hidden"></div><div class="rule"></div><div class="field"><label>Browse existing disease / reference target catalog</label><select id="catalog-filter"><option value="all">All targets</option><option value="Alzheimer">Alzheimer's disease</option><option value="Parkinson">Parkinson's disease</option><option value="Reference">Reference enzymes</option></select></div><div class="target-list" style="margin-top:12px" id="catalog-targets"></div></div>
+<div class="panel"><div class="panel-head"><h2>Download bioactivity dataset</h2><span class="tag">Reproducible import</span></div><div class="field"><label>ChEMBL protein target ID</label><input id="target-id" value="CHEMBL205" placeholder="CHEMBL205"></div><div class="formrow two" style="margin-top:12px"><div class="field"><label>Measurement type</label><select id="target-endpoint"><option>IC50</option><option>Ki</option><option>Kd</option></select></div><div class="field"><label>Limit raw rows (0 = full)</label><input id="target-limit" value="0" type="number" min="0" max="100000"></div></div><div class="form-actions"><button class="btn" id="target-download-btn">Download & audit target</button></div><div id="target-status" class="status hidden"></div><div class="rule"></div><h3>Alternative databases</h3><p>BindingDB affinity records are available for genes in the built-in catalog. PubChem BioAssay provides raw assay exports requiring manual endpoint review.</p><div class="formrow two"><div class="field"><label>Catalog gene</label><select id="alt-gene"></select></div><div class="field"><label>Source</label><select id="alt-provider"><option value="bindingdb">BindingDB</option><option value="chembl">ChEMBL</option><option value="pubchem">PubChem BioAssay</option></select></div></div><button class="btn secondary small" id="alt-download-btn">Find data in source</button><div id="alt-status" class="status hidden"></div></div></div>
+<div class="section-heading"><div><h2>Import your dataset</h2><p>Accepted input: a harmonized CSV with <code>smiles,response</code> and optional assay metadata.</p></div></div><div class="panel"><div class="formrow two"><div class="field"><label>Choose CSV</label><input type="file" id="csv-file" accept=".csv"></div><div class="field"><label>Import rules</label><div class="note">Up to 8,000 rows / 8 MB; one target and endpoint per file. Exact measurements only when relation field supplied.</div></div></div><div class="form-actions"><button class="btn" id="upload-btn">Upload & quality-audit</button><a href="/api/example.csv" class="btn secondary">Download test CSV</a></div><div id="upload-status" class="status hidden"></div></div>
+<div class="section-heading"><div><h2>Workspace datasets</h2><p>Import audit, scaffold counts and downloadable original CSVs.</p></div><button class="btn secondary small" id="refresh-data-btn">Refresh library</button></div><div class="tablebox"><table><thead><tr><th>Dataset / target</th><th>Source</th><th>Endpoint</th><th>Observations</th><th>Assays</th><th>Scaffolds</th><th>Download</th></tr></thead><tbody id="dataset-table"><tr><td colspan="7">Loading…</td></tr></tbody></table></div>
+</section>
+<section id="page-experiments" class="page"><span class="eyebrow">COMPUTATIONAL MODELING / EVALUATION</span><h1>Model laboratory</h1><p class="lead">Configure reproducible regression or binary classification experiments with explicit training folds, hyperparameters, and multiple random seeds.</p>
+<div class="grid2"><div class="panel"><div class="panel-head"><h2>Experimental design</h2><span class="tag">Train / validate</span></div>
+<div class="field"><label>Dataset</label><select id="exp-dataset"></select></div>
+<div class="formrow two" style="margin-top:14px"><div class="field"><label>Prediction task</label><select id="exp-task"><option value="regression">Regression · pActivity</option><option value="classification">Binary classification · Active / inactive</option></select></div><div class="field" id="threshold-field"><label>Active threshold (pActivity ≥)</label><input id="exp-threshold" value="6" type="number" step="0.5"></div></div>
+<div class="formrow"><div class="field"><label>Group-disjoint split</label><select id="exp-strategy"><option value="scaffold">Murcko scaffold</option><option value="molecule">Molecular identity</option><option value="assay">Experimental assay</option></select></div><div class="field"><label>Number of CV folds</label><select id="exp-folds"><option>2</option><option>3</option><option selected>5</option><option>10</option></select></div><div class="field"><label>Random seeds</label><input id="exp-seeds" value="17,29,42"></div></div><div class="field"><label>Molecular features & assay-context ablations</label><div class="choices" id="variant-choices"></div></div><p class="note">Quality-weighted ablations require estimators that support sample weights. Assay-held-out validation requires genuine assay metadata.</p></div>
+<div class="panel"><div class="panel-head"><h2>Model selection</h2><span class="tag">14–15 algorithms / task</span></div><div class="choices" id="model-choices"></div><div class="rule"></div><h3>Shared hyperparameters</h3><div class="formrow four" style="margin-top:13px"><div class="field"><label>Estimators</label><input id="exp-trees" type="number" value="100" min="16" max="500"></div><div class="field"><label>Tree leaf min</label><input id="exp-leaf" type="number" value="2"></div><div class="field"><label>FP bits</label><select id="exp-bits"><option>256</option><option selected>512</option><option>1024</option><option>2048</option></select></div><div class="field"><label>Radius</label><select id="exp-radius"><option>1</option><option selected>2</option><option>3</option></select></div></div><div class="formrow two"><div class="field"><label>ANN hidden layers (comma-separated)</label><input id="exp-layers" value="128,64"></div><div class="field"><label>ANN maximum iterations</label><input id="exp-maxiter" type="number" value="150"></div></div><div class="formrow four"><div class="field"><label>ANN learning rate</label><input id="exp-lr" type="number" step="0.0001" value="0.001"></div><div class="field"><label>ANN L2 penalty</label><input id="exp-alpha" type="number" step="0.0001" value="0.001"></div><div class="field"><label>SVM C</label><input id="exp-c" type="number" step="0.5" value="10"></div><div class="field"><label>KNN neighbors</label><input id="exp-knn" type="number" value="5"></div></div><div class="formrow two"><div class="field"><label>Regression conformal alpha</label><input id="exp-conformal" type="number" min="0.05" max="0.30" step="0.05" value="0.10"></div><div class="field"><label>Interpretation</label><div class="note">Test coverage may be below nominal under scaffold or assay shift</div></div></div><p class="note">XGBoost, LightGBM and CatBoost are optional installations; the run will explain when they are unavailable.</p></div></div>
+<div class="panel" style="margin-top:18px"><div class="panel-head"><div><h2>Experiment launch</h2><p>Repeated grouped cross-validation; a maximum of 200 fitted model–ablation combinations per run.</p></div><div><span class="kicker">ESTIMATED FITS</span><h2 style="font-size:30px;color:var(--aqua)" id="fit-estimate">—</h2></div></div><button class="btn" id="run-exp-btn">Run reproducible experiment &nbsp;↗</button><div id="exp-status" class="status hidden"></div></div>
+</section>
+
+
+<section id="page-hub" class="page">
+ <span class="eyebrow">DATA MANAGEMENT / TASK-SPECIFIC RESEARCH</span>
+ <h1>Interaction dataset hub</h1>
+ <p class="lead">Independent data sources, integrity checks, and model catalogs for three interaction learning tasks. All results are intended for computational benchmarking, not clinical recommendations.</p>
+ <div class="hub-tabs" role="tablist" aria-label="Interaction research task">
+ <button class="active" data-hub="dti" type="button">01 · Drug–target (DTI)</button>
+ <button data-hub="ddi" type="button">02 · Drug–drug (DDI)</button>
+ <button data-hub="ppi" type="button">03 · Protein–protein (PPI)</button>
+ </div>
+ <div class="grid2">
+  <div class="panel"><div class="panel-head"><h2 id="hub-title">DTI source catalog</h2><span class="tag">Verified registry</span></div>
+   <p id="hub-intro" class="note">Select a curated source to download or prepare a compatible upload.</p>
+   <div class="formrow three" style="margin-top:16px">
+    <div class="field"><label>Maximum sampled records</label><select id="hub-limit"><option>2000</option><option selected>12000</option><option>20000</option></select></div>
+    <div class="field"><label>Sample seed</label><input id="hub-seed" type="number" value="42" min="0" max="2000000000"></div>
+    <div class="field"><label>Reference negative sampling (HuRI only)</label><select id="hub-neg"><option value="no" selected>No</option><option value="yes">Yes — TDC reference controls</option></select></div>
+   </div>
+   <div class="callout" id="hub-caution">Large external sources may require considerable disk space. Original response values are not silently converted to a different scale.</div>
+  </div>
+  <div class="panel"><div class="panel-head"><h2>Models and evaluation</h2><span class="tag" id="hub-task-tag">DTI</span></div>
+   <div class="field"><label>Research task</label><select id="hub-prediction"><option value="regression">Regression</option><option value="classification">Binary classification</option></select></div>
+   <p class="note" style="margin-top:12px" id="hub-features"></p>
+   <div class="choices" id="hub-model-list"></div>
+   <div class="rule"></div>
+   <p class="note" id="hub-validation"></p>
+   <button class="btn secondary" id="hub-open-workflow">Open model laboratory ↗</button>
+  </div>
+ </div>
+ <div class="section-heading"><div><h2>Available datasets</h2><p>Sources and restrictions are displayed individually; use original provenance when citing results.</p></div></div>
+ <div class="grid3" id="hub-resources" aria-live="polite"></div>
+ <div class="panel" style="margin-top:20px"><div class="panel-head"><h2>Download and import status</h2><span class="tag">Background job</span></div>
+   <div id="hub-status" class="status">Choose an eligible dataset card to begin retrieval. Some sources require an existing license or manual export.</div>
+   <div id="hub-filelinks" class="form-actions"></div>
+ </div>
+</section>
+
+<section id="page-dti" class="page">
+ <span class="eyebrow">PAIRWISE DRUG–TARGET EVALUATION / GENERALIZATION</span>
+ <h1>Drug–target cold-start laboratory</h1>
+ <p class="lead">Evaluate previously unseen interaction pairs, molecules, proteins, or both under audited, entity-disjoint train–test splits. Protein sequence features are required to evaluate unseen targets.</p>
+ <div class="grid2">
+  <div class="panel">
+   <div class="panel-head"><h2>Import multi-target dataset</h2><span class="tag">SMILES + FASTA sequence</span></div>
+   <p class="note">Upload a CSV with <code>smiles, target_id, target_sequence, response</code>. Include <code>endpoint</code> and experimental provenance for scientific evaluation.</p>
+   <div class="field"><label>Interaction dataset CSV</label><input id="dti-csv" type="file" accept=".csv"></div>
+   <div class="form-actions"><button id="dti-upload" class="btn">Audit & import</button><a class="btn secondary" href="/api/v3/dti/example.csv" download>Synthetic example</a></div>
+   <div class="status hidden" id="dti-upload-status"></div>
+   <div class="rule"></div>
+   <h3>Combine existing enzyme datasets</h3>
+   <p class="note">Select at least two single-target datasets with matching activity endpoints. Supported catalog targets are linked to verified UniProt protein sequences over the network. Other targets require sequences in the imported CSV.</p>
+   <div class="field"><label>Single-target datasets</label><div id="dti-merge-choices" class="choices" style="max-height:185px;overflow:auto"></div></div>
+   <button id="dti-merge" class="btn secondary" style="margin-top:14px">Build multi-target dataset</button>
+   <div class="status hidden" id="dti-merge-status"></div>
+  </div>
+  <div class="panel">
+   <div class="panel-head"><h2>Generalization protocols</h2><span class="tag">Pair-safe</span></div>
+   <div class="grid2">
+    <div class="feature"><strong>Warm start</strong><p>Unseen drug–protein combinations. Both entities are present in training.</p></div>
+    <div class="feature"><strong>Cold drug</strong><p>Test compounds never occur in the training interactions.</p></div>
+    <div class="feature"><strong>Cold target</strong><p>Test protein sequences are never used during training.</p></div>
+    <div class="feature"><strong>Cold drug–target</strong><p>Both entity types are held out, with mixed cross-block observations excluded.</p></div>
+   </div>
+   <div class="callout" style="margin-top:18px">A single-target enzyme CSV cannot be used to claim cold-target or cold-both performance. Highly homologous proteins also require additional sequence-similarity controls.</div>
+  </div>
+ </div>
+ <div class="panel" style="margin-top:18px">
+  <div class="panel-head"><h2>Experiment designer</h2><span class="tag">2–10 folds · up to 5 seeds</span></div>
+  <div class="formrow"><div class="field"><label>Multi-target dataset</label><select id="dti-dataset"></select></div><div class="field"><label>Prediction task</label><select id="dti-task"><option value="regression">Regression</option><option value="classification">Binary classification</option></select></div><div class="field"><label>Validation protocol</label><select id="dti-strategy"><option value="warm">Warm start</option><option value="cold_drug">Cold drug</option><option value="cold_target">Cold target</option><option value="cold_both">Cold drug–target</option></select></div></div>
+  <div class="formrow four"><div class="field"><label>CV folds</label><select id="dti-folds"><option>2</option><option>3</option><option selected>5</option><option>10</option></select></div><div class="field"><label>Random seeds</label><input id="dti-seeds" value="17,29,42"></div><div class="field"><label>Active threshold (pActivity ≥)</label><input id="dti-threshold" type="number" step=".1" value="6"></div><div class="field"><label>Morgan fingerprint bits</label><select id="dti-bits"><option>128</option><option selected>256</option><option>512</option><option>1024</option></select></div></div>
+  <h3>Machine-learning models</h3><div id="dti-models" class="choices" style="margin-top:10px"></div>
+  <h3 style="margin-top:18px">Feature ablations</h3><div id="dti-variants" class="choices" style="margin-top:10px"></div>
+  <div class="formrow four" style="margin-top:18px"><div class="field"><label>Trees/boosting iterations</label><input id="dti-trees" type="number" min="10" max="500" value="80"></div><div class="field"><label>ANN hidden layers</label><input id="dti-layers" value="128,64"></div><div class="field"><label>ANN learning rate</label><input id="dti-lr" type="number" step=".0001" value=".001"></div><div class="field"><label>ANN maximum iterations</label><input id="dti-iterations" type="number" min="25" max="500" value="125"></div></div>
+  <div class="form-actions"><button id="dti-run" class="btn">Run DTI cross-validation ↗</button><span id="dti-fit-count" class="tag">— fits</span></div>
+  <div id="dti-run-status" class="status hidden"></div>
+ </div>
+ <div class="panel" style="margin-top:18px">
+  <div class="panel-head"><h2>DTI datasets & research exports</h2><button id="dti-refresh" class="btn secondary small">Refresh</button></div>
+  <div class="tablebox"><table><thead><tr><th>Dataset</th><th>Pairs</th><th>Drugs</th><th>Proteins</th><th>Endpoint</th><th>Download</th></tr></thead><tbody id="dti-dataset-table"><tr><td colspan="6">Loading…</td></tr></tbody></table></div>
+  <div class="rule"></div>
+  <div id="dti-results" class="status hidden"></div>
+  <div class="tablebox" style="margin-top:15px"><table><thead><tr><th>Recent DTI experiment</th><th>Protocol</th><th>Task</th><th>Fits</th><th>Research package</th></tr></thead><tbody id="dti-results-table"><tr><td colspan="5">No DTI experiments yet</td></tr></tbody></table></div>
+ </div>
+</section>
+
+<section id="page-ddi" class="page"><span class="eyebrow">INTERACTION BIOINFORMATICS / DDI</span><h1>Drug–drug interactions</h1><p class="lead">Train on curated pairwise drug observations, with symmetric fingerprints and entity-aware CV. Do not interpret model outputs as clinical interaction advice.</p>
+ <div class="grid2">
+  <div class="panel pair-highlight"><div class="panel-head"><h2>Evidence library</h2><span class="tag">Molecular pair interactions · pharmacological evidence</span></div><div class="field"><label>Upload pairwise interaction CSV</label><input id="ddi-file" type="file" accept=".csv"></div><p class="note">Required: <code>drug_a, drug_b, label</code>. Optional provenance: <code>source_id,evidence_type,interaction_type</code>.</p><div class="form-actions"><button class="btn" id="ddi-upload">Import & audit pairs</button><a class="btn secondary" href="/api/v4/pairs/ddi/example.csv">Example CSV ↓</a><button class="btn ghost" id="ddi-demo">Load demo into workspace</button></div><div id="ddi-import-status" class="status hidden"></div><div class="rule"></div>
+<div class="panel" style="margin:14px 0 21px;border-color:#3b746a;background:linear-gradient(155deg,#153847,#102634)">
+ <div class="panel-head"><h2>HuRI human protein interactome</h2><span class="tag">TDC curated reference</span></div>
+ <p class="note">Download a protein sequence-pair dataset. By default, HuRI reports positive interactions only. The optional reference-control sampler follows TDC's benchmark method; sampled controls are not manually confirmed noninteractions.</p>
+ <div class="formrow two"><div class="field"><label>Maximum pairs</label><select id="huri-limit"><option>2000</option><option selected>10000</option><option>20000</option></select></div>
+ <div class="field"><label>Reference controls</label><select id="huri-neg"><option value="no" selected>None · network analysis</option><option value="yes">TDC reference sampling · benchmark only</option></select></div></div>
+ <div class="form-actions"><button class="btn" id="huri-download">Retrieve HuRI dataset</button><a class="btn secondary" href="https://tdcommons.ai/multi_pred_tasks/ppi/" target="_blank" rel="noopener noreferrer">Source documentation</a></div>
+ <div id="huri-status" class="status hidden"></div><div id="huri-files" class="form-actions"></div>
+</div>
+<h3>Public evidence sources</h3><div class="note">Import an appropriately licensed pairwise DDI CSV, such as a harmonized Therapeutics Data Commons export. Multi-label adverse-event datasets must be filtered to one well-defined task; unobserved drug pairs are not negative examples. <a href="https://tdcommons.ai/multi_pred_tasks/ddi/" target="_blank" rel="noopener">TDC source and licensing ↗</a></div></div>
+  <div class="panel"><div class="panel-head"><h2>Network analysis</h2><span class="tag">Observed edges only</span></div><div class="field"><label>Curated pair dataset</label><select id="ddi-dataset"></select></div><div class="pair-statbar"><div><strong id="ddi-nodes">—</strong><small>Entities</small></div><div><strong id="ddi-edges">—</strong><small>Observed pairs</small></div><div><strong id="ddi-components">—</strong><small>Components</small></div><div><strong id="ddi-density">—</strong><small>Graph density</small></div></div><div class="pair-graph" id="ddi-graph"><div class="viewer-msg">Import a dataset to explore its interaction graph.</div></div><p class="pair-graph-caption">Illustrative topology of a limited high-degree subgraph. Edges represent observations, not proof of physical binding.</p><div id="ddi-graph-status" class="status hidden"></div></div>
+ </div>
+ <div class="panel" style="margin-top:18px"><div class="panel-head"><h2>Interaction experiment designer</h2><span class="tag">Pair-disjoint validation · 2–10 folds</span></div><div class="formrow four"><div class="field"><label>Task</label><select id="ddi-task"><option value="classification">Binary classification</option><option value="regression">Quantitative regression</option></select></div><div class="field"><label>Generalization protocol</label><select id="ddi-strategy"><option value="warm">Warm · unseen pairs</option><option value="cold_one">Cold · one unseen entity</option><option value="cold_both">Cold · two unseen entities</option></select></div><div class="field"><label>CV folds</label><select id="ddi-folds"><option>2</option><option>3</option><option selected>5</option><option>10</option></select></div><div class="field"><label>Random seeds</label><input id="ddi-seeds" value="17,29" placeholder="17,29,42"></div></div>
+ <h3>Models</h3><div class="choices" id="ddi-model-choices" style="margin:11px 0 20px"></div><h3>Feature ablations</h3><div class="choices" id="ddi-ablations" style="margin:11px 0 20px"></div>
+ <div class="formrow four"><div class="field"><label>Morgan fingerprint bits</label><select id="ddi-bits"><option>128</option><option selected>256</option><option>512</option><option>1024</option><option>2048</option></select></div><div class="field"><label>Fingerprint radius</label><select id="ddi-radius"><option>1</option><option selected>2</option><option>3</option></select></div><div class="field"><label>Trees / boosting iterations</label><input id="ddi-trees" type="number" min="10" max="500" value="80"></div><div class="field"><label>MLP hidden layers</label><input id="ddi-layers" value="128,64"></div></div>
+ <div class="formrow four"><div class="field"><label>ANN learning rate</label><input id="ddi-lr" type="number" step="0.0001" min="0.00001" max="0.1" value="0.001"></div><div class="field"><label>ANN iterations</label><input id="ddi-iterations" type="number" min="25" max="500" value="125"></div><div class="field"><label>Minimum tree leaf</label><input id="ddi-leaf" type="number" min="1" max="20" value="2"></div><div class="field"><label>Regularization</label><input id="ddi-regularization" type="number" step="0.1" min="0.01" value="1"></div></div>
+ <div class="form-actions"><button id="ddi-run" class="btn">Run interaction benchmark ↗</button><span class="tag" id="ddi-fits">— fits</span><button id="ddi-refresh" class="btn secondary">Refresh</button></div><div id="ddi-run-status" class="status hidden"></div>
+ <div class="callout" style="margin-top:18px">Binary classification requires explicitly observed positive and negative labels. PPI databases usually provide mostly positives; missing edges are not accepted as verified negatives. Cold-partner splits can discard cross-block pairs, which will be counted in every exported fold.</div></div>
+ <div class="panel" style="margin-top:18px"><div class="panel-head"><h2>Datasets & completed experiments</h2><span class="tag">Downloadable records</span></div><div class="tablebox"><table><thead><tr><th>Dataset</th><th>Pairs</th><th>Entities</th><th>Connected components</th><th>CSV / exclusions</th></tr></thead><tbody id="ddi-table"><tr><td colspan="5">No datasets yet</td></tr></tbody></table></div><div class="rule"></div><div id="ddi-run-results" class="status hidden"></div><div class="tablebox"><table><thead><tr><th>Evaluation</th><th>Protocol</th><th>Task</th><th>Fits</th><th>Report</th></tr></thead><tbody id="ddi-run-table"><tr><td colspan="5">No completed experiments</td></tr></tbody></table></div></div>
+ </section>
+<section id="page-ppi" class="page"><span class="eyebrow">INTERACTION BIOINFORMATICS / PPI</span><h1>Protein–protein interactions</h1><p class="lead">Analyze experimental or curated associations. Physical bindings must be distinguished from functional network predictions; only evidence-backed negatives are valid classification labels.</p>
+ <div class="grid2">
+  <div class="panel pair-highlight"><div class="panel-head"><h2>Evidence library</h2><span class="tag">Protein associations · interactome reliability</span></div><div class="field"><label>Upload pairwise interaction CSV</label><input id="ppi-file" type="file" accept=".csv"></div><p class="note">Required: <code>protein_a, protein_b, label (or protein IDs for network-only import)</code>. Optional provenance: <code>source_id,evidence_type,interaction_type</code>.</p><div class="form-actions"><button class="btn" id="ppi-upload">Import & audit pairs</button><a class="btn secondary" href="/api/v4/pairs/ppi/example.csv">Example CSV ↓</a><button class="btn ghost" id="ppi-demo">Load demo into workspace</button></div><div id="ppi-import-status" class="status hidden"></div><div class="rule"></div><h3>Public evidence sources</h3><div class="formrow two"><div class="field"><label>STRING protein symbols (2–30, comma separated)</label><input id="ppi-string-genes" value="APP,BACE1,PSEN1,MAPT,GSK3B,ACHE"></div><div class="field"><label>Network evidence</label><select id="ppi-string-type"><option value="physical">Physical-association network</option><option value="functional">Functional-association network</option></select></div></div><div class="formrow two"><div class="field"><label>Minimum STRING confidence (0–1000)</label><input type="number" id="ppi-string-score" min="0" max="1000" value="700"></div><div class="field"><label>Organism taxon</label><input id="ppi-string-species" type="number" value="9606"></div></div><button class="btn secondary" id="ppi-string-download">Retrieve STRING network</button><div id="ppi-string-status" class="status hidden"></div><div class="note">STRING returns associations and scores, not verified negative pairs. Identifier-only imports enable network viewing; ML training requires amino-acid sequences and valid outcome labels. <a href="https://downloads.thebiogrid.org/BioGRID" target="_blank" rel="noopener">BioGRID datasets ↗</a> · <a href="https://www.ebi.ac.uk/intact/" target="_blank" rel="noopener">IntAct ↗</a></div></div>
+  <div class="panel"><div class="panel-head"><h2>Network analysis</h2><span class="tag">Observed edges only</span></div><div class="field"><label>Curated pair dataset</label><select id="ppi-dataset"></select></div><div class="pair-statbar"><div><strong id="ppi-nodes">—</strong><small>Entities</small></div><div><strong id="ppi-edges">—</strong><small>Observed pairs</small></div><div><strong id="ppi-components">—</strong><small>Components</small></div><div><strong id="ppi-density">—</strong><small>Graph density</small></div></div><div class="pair-graph" id="ppi-graph"><div class="viewer-msg">Import a dataset to explore its interaction graph.</div></div><p class="pair-graph-caption">Illustrative topology of a limited high-degree subgraph. Edges represent observations, not proof of physical binding.</p><div id="ppi-graph-status" class="status hidden"></div></div>
+ </div>
+ <div class="panel" style="margin-top:18px"><div class="panel-head"><h2>Interaction experiment designer</h2><span class="tag">Pair-disjoint validation · 2–10 folds</span></div><div class="formrow four"><div class="field"><label>Task</label><select id="ppi-task"><option value="classification">Binary classification</option><option value="regression">Quantitative regression</option></select></div><div class="field"><label>Generalization protocol</label><select id="ppi-strategy"><option value="warm">Warm · unseen pairs</option><option value="cold_one">Cold · one unseen entity</option><option value="cold_both">Cold · two unseen entities</option></select></div><div class="field"><label>CV folds</label><select id="ppi-folds"><option>2</option><option>3</option><option selected>5</option><option>10</option></select></div><div class="field"><label>Random seeds</label><input id="ppi-seeds" value="17,29" placeholder="17,29,42"></div></div>
+ <h3>Models</h3><div class="choices" id="ppi-model-choices" style="margin:11px 0 20px"></div><h3>Feature ablations</h3><div class="choices" id="ppi-ablations" style="margin:11px 0 20px"></div>
+ <div class="formrow four"><div class="field"><label>Morgan fingerprint bits</label><select id="ppi-bits"><option>128</option><option selected>256</option><option>512</option><option>1024</option><option>2048</option></select></div><div class="field"><label>Fingerprint radius</label><select id="ppi-radius"><option>1</option><option selected>2</option><option>3</option></select></div><div class="field"><label>Trees / boosting iterations</label><input id="ppi-trees" type="number" min="10" max="500" value="80"></div><div class="field"><label>MLP hidden layers</label><input id="ppi-layers" value="128,64"></div></div>
+ <div class="formrow four"><div class="field"><label>ANN learning rate</label><input id="ppi-lr" type="number" step="0.0001" min="0.00001" max="0.1" value="0.001"></div><div class="field"><label>ANN iterations</label><input id="ppi-iterations" type="number" min="25" max="500" value="125"></div><div class="field"><label>Minimum tree leaf</label><input id="ppi-leaf" type="number" min="1" max="20" value="2"></div><div class="field"><label>Regularization</label><input id="ppi-regularization" type="number" step="0.1" min="0.01" value="1"></div></div>
+ <div class="form-actions"><button id="ppi-run" class="btn">Run interaction benchmark ↗</button><span class="tag" id="ppi-fits">— fits</span><button id="ppi-refresh" class="btn secondary">Refresh</button></div><div id="ppi-run-status" class="status hidden"></div>
+ <div class="callout" style="margin-top:18px">Binary classification requires explicitly observed positive and negative labels. PPI databases usually provide mostly positives; missing edges are not accepted as verified negatives. Cold-partner splits can discard cross-block pairs, which will be counted in every exported fold.</div></div>
+ <div class="panel" style="margin-top:18px"><div class="panel-head"><h2>Datasets & completed experiments</h2><span class="tag">Downloadable records</span></div><div class="tablebox"><table><thead><tr><th>Dataset</th><th>Pairs</th><th>Entities</th><th>Connected components</th><th>CSV / exclusions</th></tr></thead><tbody id="ppi-table"><tr><td colspan="5">No datasets yet</td></tr></tbody></table></div><div class="rule"></div><div id="ppi-run-results" class="status hidden"></div><div class="tablebox"><table><thead><tr><th>Evaluation</th><th>Protocol</th><th>Task</th><th>Fits</th><th>Report</th></tr></thead><tbody id="ppi-run-table"><tr><td colspan="5">No completed experiments</td></tr></tbody></table></div></div>
+ </section>
+<section id="page-custom" class="page"><span class="eyebrow">EXTENSIBILITY / RESEARCH CODE</span><h1>Custom Python models</h1><p class="lead">Upload a Python module or Jupyter notebook defining your estimator. The server stores code but does not execute it unless a dedicated isolated Docker runtime is available.</p>
+<div class="grid2"><div class="panel"><div class="panel-head"><h2>Model interface</h2><span class="tag">.py / .ipynb</span></div><p>Define <code>build_model(task, params)</code> returning an estimator supporting <code>fit</code>, <code>predict</code>, and optionally <code>predict_proba</code>. Notebook code cells must be standard Python without shell magics.</p><pre>from sklearn.ensemble import RandomForestClassifier, RandomForestRegressor
+
+def build_model(task, params):
+    seed = params.get("random_state", 42)
+    if task == "classification":
+        return RandomForestClassifier(n_estimators=80, random_state=seed)
+    return RandomForestRegressor(n_estimators=80, random_state=seed)</pre><div class="field"><label>Upload your Python model</label><input id="custom-file" type="file" accept=".py,.ipynb"></div><div class="form-actions"><button class="btn" id="custom-upload-btn">Register model</button><a href="/assets/custom_model_template.py" target="_blank" class="btn secondary small">View code template</a></div><div id="custom-upload-status" class="status hidden"></div></div>
+<div class="panel"><div class="panel-head"><h2>Isolated training</h2><span class="tag" id="docker-status">Checking runtime…</span></div><div class="callout">Python model files can execute arbitrary code. Run custom models only on a trusted local installation. Docker isolation reduces exposure but does not guarantee absolute containment; never enable this on a public multi-user server without additional security review.</div><div class="formrow two" style="margin-top:18px"><div class="field"><label>Registered model</label><select id="custom-model"></select></div><div class="field"><label>Curated dataset</label><select id="custom-dataset"></select></div></div><div class="formrow two"><div class="field"><label>Prediction task</label><select id="custom-task"><option value="regression">Regression</option><option value="classification">Binary classification</option></select></div><div class="field"><label>Split</label><select id="custom-strategy"><option value="scaffold">Scaffold</option><option value="molecule">Molecule</option><option value="assay">Assay</option></select></div></div><div class="formrow"><div class="field"><label>Folds</label><input id="custom-folds" type="number" min="2" max="10" value="5"></div><div class="field"><label>Seeds</label><input id="custom-seeds" value="42"></div><div class="field"><label>Active threshold</label><input id="custom-threshold" type="number" step="0.5" value="6"></div></div><button class="btn" id="custom-run-btn">Evaluate in isolated runtime</button><div id="custom-status" class="status hidden"></div><div class="rule"></div><h3>Setup on Windows</h3><p>Install Docker Desktop with Linux containers enabled, then run <code>BUILD_CUSTOM_SANDBOX.bat</code> in the application folder. Rebuild after installing new supported dependencies.</p></div></div>
+</section>
+<section id="page-docking" class="page"><span class="eyebrow">STRUCTURAL BIOINFORMATICS / 3D INTERACTIONS</span><h1>3D structures & molecular docking</h1><p class="lead">Inspect protein structures from the RCSB PDB, build illustrative ligand conformers, and run an optional rigid-receptor Vina calculation using appropriately prepared structures.</p>
+<div class="grid2"><div class="panel"><div class="panel-head"><h2>Interactive structure viewer</h2><span class="tag" id="view-engine-status">3D renderer</span></div><div class="formrow two"><div class="field"><label>RCSB PDB ID</label><input id="pdb-id" placeholder="e.g., 1CRN" value="1CRN"></div><div class="field"><label>Ligand SMILES</label><input id="dock-smiles" placeholder="e.g., CCO" value="CCO"></div></div><div class="form-actions"><button class="btn secondary small" id="load-protein">Load PDB structure</button><button class="btn secondary small" id="load-ligand">Generate 3D conformer</button></div><div class="viewer" id="structure-viewer"><div class="viewer-msg">Enter a PDB ID or a SMILES structure, then load the 3D model. The viewer requires access to the 3Dmol library.</div></div><p class="note">Structures downloaded from PDB are for inspection. A raw PDB file is not necessarily an appropriate docking receptor without scientific preparation.</p></div>
+<div class="panel"><div class="panel-head"><h2>AutoDock Vina</h2><span class="tag" id="vina-status">Checking engine…</span></div><p>Upload prepared receptor and ligand <code>PDBQT</code> files. Set the search box center and dimensions in Ångströms.</p><div class="formrow two"><div class="field"><label>Receptor (.pdbqt)</label><input id="dock-receptor" type="file" accept=".pdbqt"></div><div class="field"><label>Ligand (.pdbqt)</label><input id="dock-ligand" type="file" accept=".pdbqt"></div></div><div class="formrow"><div class="field"><label>Center X (Å)</label><input id="dock-cx" type="number" step="0.1" value="0"></div><div class="field"><label>Center Y (Å)</label><input id="dock-cy" type="number" step="0.1" value="0"></div><div class="field"><label>Center Z (Å)</label><input id="dock-cz" type="number" step="0.1" value="0"></div></div><div class="formrow"><div class="field"><label>Box X (Å)</label><input id="dock-sx" type="number" value="20"></div><div class="field"><label>Box Y (Å)</label><input id="dock-sy" type="number" value="20"></div><div class="field"><label>Box Z (Å)</label><input id="dock-sz" type="number" value="20"></div></div><div class="formrow two"><div class="field"><label>Exhaustiveness</label><input id="dock-exhaust" type="number" min="1" max="32" value="8"></div><div class="field"><label>Seed</label><input id="dock-seed" type="number" value="42"></div></div><div class="actions"><button class="btn" id="dock-run-btn">Run docking evaluation</button><button class="btn secondary" id="ligand-prepare-btn">Prepare ligand PDBQT (Open Babel)</button></div><div id="dock-status" class="status hidden"></div><div id="dock-download" class="status hidden"></div><div class="rule"></div><div class="callout">Binding scores are docking estimates, not experimentally verified binding affinities. Protonation, cofactor retention, protein preparation, search-box selection, and control-ligand redocking are necessary for publishable work.</div></div></div>
+</section>
+<section id="page-results" class="page"><span class="eyebrow">MEASURED PERFORMANCE / SCIENTIFIC RECORD</span><h1>Results & reports</h1><p class="lead">Evaluate performance across separate seeds, folds and ablation conditions. Preserve out-of-fold predictions and all applied settings.</p><div class="panel"><div class="panel-head"><h2>Completed experiments</h2><button class="btn secondary small" id="refresh-runs-btn">Refresh results</button></div><div id="runs-list" class="tablebox"><table><thead><tr><th>Experiment</th><th>Task</th><th>CV</th><th>Fits</th><th>Action</th></tr></thead><tbody id="runs-table"><tr><td colspan="5">Loading results…</td></tr></tbody></table></div></div>
+<div id="result-detail" class="hidden" style="margin-top:18px"><div class="grid2"><div class="panel"><div class="panel-head"><h2 id="result-title">Experiment details</h2><a id="result-bundle" class="btn small" href="#">Download full report</a></div><div id="result-info" class="note"></div><div class="tablebox" style="margin-top:14px"><table><thead id="result-th"></thead><tbody id="result-tbody"></tbody></table></div></div><div class="panel"><div class="panel-head"><h2>Cross-validation comparison</h2></div><img class="result-chart" id="result-figure" alt="Comparative evaluation figure"><div id="diagnostic-gallery" class="grid2" style="margin-top:10px"></div></div></div></div>
+</section>
+<div class="foot">AssayLens Research Workbench 5.2 · Local deployment · Scientific research software, not clinical decision support. Experimental evidence and independent validation remain mandatory.</div>
+</main></div>
+<script>
+const $=id=>document.getElementById(id);
+const $$=q=>[...document.querySelectorAll(q)];
+const state={catalog:[],models:{regression:[],classification:[]},datasets:[],runs:[],plugins:[],selected:[],docking:null};
+const fmt=n=>Number(n??0).toLocaleString();
+const clean=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const show=(id,value,kind='')=>{const n=$(id);n.className='status '+kind;n.textContent=typeof value==='string'?value:JSON.stringify(value,null,2);};
+async function request(url,options){let r=await fetch(url,options);let contentType=r.headers.get('content-type')||'';let v=contentType.includes('json')?await r.json():await r.text();if(!r.ok)throw Error(typeof v==='object'?(v.detail||JSON.stringify(v)):v);return v;}
+const jsonPost=(url,body)=>request(url,{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(body)});
+function navigate(id){$$('.page').forEach(n=>n.classList.toggle('active',n.id==='page-'+id));$$('[data-page]').forEach(n=>n.classList.toggle('active',n.dataset.page===id));$('crumb').textContent=id.toUpperCase();window.scrollTo({top:0,behavior:'instant'});if(id==='results')refreshRuns();if(id==='datasets')refreshDatasets();if(id==='custom')refreshPlugins();if(id==='dti')dtiRefresh();if(id==='hub')hubRefresh();if(id==='ddi'||id==='ppi')pairRefresh(id);}
+function cardOptions(options,parent,name,preselected=[]){parent.replaceChildren(...options.map(x=>{const l=document.createElement('label');l.className='choice';const box=document.createElement('input');box.type='checkbox';box.name=name;box.value=x;box.checked=preselected.includes(x);const t=document.createElement('span');t.textContent=x.replaceAll('_',' ').toUpperCase();l.append(box,t);box.onchange=estimate;return l;}));}
+function values(name){return $$(`input[name="${name}"]:checked`).map(n=>n.value);}
+function seeds(id){const result=$(id).value.split(/[\s,]+/).filter(Boolean).map(Number);if(!result.length||result.length>5||result.some(x=>!Number.isInteger(x)||x<0)||new Set(result).size!==result.length)throw Error('Choose 1–5 distinct nonnegative integer seeds');return result;}
+function estimate(){const v=values('v-variant').length*values('v-model').length*Number($('exp-folds').value||0)*$('exp-seeds').value.split(/[\s,]+/).filter(Boolean).length;$('fit-estimate').textContent=fmt(v);}
+function updateModels(){const task=$('exp-task').value;cardOptions(state.models[task]||[],$('model-choices'),'v-model',task==='classification'?['random_forest','logistic','ann_mlp']:['random_forest','extra_trees','ann_mlp']);$('threshold-field').style.opacity=task==='classification'?'1':'.45';estimate();}
+function populateDatasets(){const options=[new Option('Choose curated dataset',''),...state.datasets.map(d=>new Option(`${d.gene||d.target||d.id.slice(0,7)} · ${d.endpoint} · ${fmt(d.rows)} rows`,d.id))];for(const id of ['exp-dataset','custom-dataset']){let prev=$(id).value;$(id).replaceChildren(...options.map(o=>new Option(o.text,o.value)));if(state.datasets.some(x=>x.id===prev))$(id).value=prev;}}
+async function refreshDatasets(){state.datasets=await request('/api/datasets');$('dash-datasets').textContent=fmt(state.datasets.length);populateDatasets();const t=$('dataset-table');t.replaceChildren();if(!state.datasets.length){t.innerHTML='<tr><td colspan="7">No datasets imported yet. Download one from ChEMBL or upload a CSV.</td></tr>';return;}for(const d of state.datasets){let tr=document.createElement('tr');tr.innerHTML=`<td><strong>${clean(d.gene||d.target||d.id.slice(0,8))}</strong><div class="subtitle">${clean(d.id.slice(0,12))}</div></td><td>${clean(d.provider)}</td><td>${clean(d.endpoint)}</td><td>${fmt(d.rows)}</td><td>${fmt(d.assays)}</td><td>${fmt(d.scaffolds)}</td><td><a href="/api/datasets/${encodeURIComponent(d.id)}/csv">CSV ↓</a> · <a href="/api/datasets/${encodeURIComponent(d.id)}/qc.csv">Audit ↓</a></td>`;t.appendChild(tr);}}
+function renderCatalog(){let group=$('catalog-filter').value;const list=state.catalog.filter(x=>group==='all'||x.diseases.includes(group));$('catalog-targets').replaceChildren(...list.map(x=>{const l=document.createElement('label');const radio=document.createElement('input');radio.type='radio';radio.name='catalog-target';radio.value=x.gene;const span=document.createElement('span');span.textContent=`${x.gene} · ${x.pathway}`;radio.onchange=()=>{$('alt-gene').value=x.gene;$('target-id').value='';show('target-status','Selected '+x.gene+'. For the exact ChEMBL ID, use the protein search field above.');};l.append(radio,span);return l;}));}
+async function refreshRuns(){state.runs=await request('/api/v2/experiments');$('dash-runs').textContent=fmt(state.runs.length);const t=$('runs-table');t.replaceChildren();if(!state.runs.length){t.innerHTML='<tr><td colspan="5">No experiments yet. Run a grouped CV evaluation from Model laboratory.</td></tr>';return;}for(const run of state.runs){const tr=document.createElement('tr');let id=String(run.id||'');tr.innerHTML=`<td><strong>${clean(id.slice(0,12))}</strong></td><td>${clean(run.task)}</td><td>${fmt(run.folds)} folds × ${fmt(run.seeds?.length)} seeds</td><td>${fmt(run.n_fits)}</td>`;let cell=document.createElement('td');let b=document.createElement('button');b.className='btn small secondary';b.textContent='View report';b.onclick=()=>openRun(id);cell.append(b);tr.append(cell);t.append(tr);}}
+async function openRun(id){const r=await request('/api/v2/experiments/'+encodeURIComponent(id));navigate('results');$('result-detail').classList.remove('hidden');$('result-title').textContent=`${r.task.toUpperCase()} · ${r.strategy} grouped CV`;$('result-info').textContent=`${r.folds} folds, ${r.seeds.length} seeds, ${r.n_fits} fitted models. Descriptive summary across repeated CV seeds.`;$('result-bundle').href='/api/v2/experiments/'+encodeURIComponent(id)+'/bundle';$('result-figure').src='/api/v2/experiments/'+encodeURIComponent(id)+'/figure';const gallery=$('diagnostic-gallery');gallery.replaceChildren();const figures=r.task==='classification'?['roc_curve.png','pr_curve.png','confusion_matrix.png']:['observed_vs_predicted.png','error_by_activity.png'];for(const figure of figures){const img=document.createElement('img');img.className='result-chart';img.loading='lazy';img.alt=figure.replaceAll('_',' ');img.src='/api/v2/experiments/'+encodeURIComponent(id)+'/diagnostic/'+figure;img.onerror=()=>img.remove();gallery.append(img);}const keys=r.task==='classification'?['model','ablation','f1_mean','roc_auc_mean','auprc_mean','mcc_mean']:['model','ablation','mae_mean','rmse_mean','r2_mean','coverage_mean'];$('result-th').innerHTML='<tr>'+keys.map(k=>`<th>${clean(k.replaceAll('_',' '))}</th>`).join('')+'</tr>';$('result-tbody').innerHTML=(r.summary||[]).map(x=>'<tr>'+keys.map(k=>`<td>${typeof x[k]==='number'?x[k].toFixed(4)+(k.endsWith('_mean')&&Number.isFinite(x[k.replace('_mean','_std')])?' ± '+x[k.replace('_mean','_std')].toFixed(4):''):clean(x[k]??'—')}</td>`).join('')+'</tr>').join('');}
+function poll(id,element,done){let attempts=0;const tick=async()=>{try{const job=await request('/api/jobs/'+id);show(element,`${job.state.toUpperCase()}\n${job.message||''}`+(job.rows?'\nRows: '+job.rows:'')+(job.items?.length?'\n'+job.items.map(x=>`${x.gene} ${x.endpoint}: ${x.state}${x.error?' — '+x.error:''}`).join('\n'):''),job.state==='error'?'error':job.state==='complete'?'ok':'');if(['complete','error'].includes(job.state)){clearInterval(timer);if(job.state==='complete')await done?.(job);}}catch(e){clearInterval(timer);show(element,e.message,'error');}if(++attempts>600){clearInterval(timer);show(element,'Polling timed out; inspect local server logs.','error');}};const timer=setInterval(tick,1500);tick();}
+async function targetSearch(){show('search-target-results','Searching target database…');try{let v=await request('/api/v2/targets/search?query='+encodeURIComponent($('protein-search').value));if(!v.targets?.length){show('search-target-results','No matching human single-protein targets. Try another gene or protein name.');return;}const n=$('search-target-results');n.replaceChildren();n.className='status';for(let x of v.targets){let row=document.createElement('div');row.style.cssText='margin-bottom:8px;padding:8px;border:1px solid #2d4d59;border-radius:7px;display:flex;justify-content:space-between;gap:10px;align-items:center';let label=document.createElement('span');label.textContent=`${x.name} · ${x.target_chembl_id}`;let b=document.createElement('button');b.className='btn small secondary';b.textContent='Use target';b.onclick=()=>{$('target-id').value=x.target_chembl_id;show('target-status',`Selected ${x.name} (${x.target_chembl_id}). Choose an endpoint, then download.`);};row.append(label,b);n.appendChild(row);}}catch(e){show('search-target-results',e.message,'error');}}
+async function downloadTarget(){show('target-status','Starting ChEMBL retrieval…');try{const body={target_id:$('target-id').value.trim().toUpperCase(),endpoint:$('target-endpoint').value,max_raw:Number($('target-limit').value)};const job=await jsonPost('/api/v2/targets/download',body);poll(job.job_id,'target-status',async()=>{await refreshDatasets();});}catch(e){show('target-status',e.message,'error');}}
+async function altDownload(){const gene=$('alt-gene').value,provider=$('alt-provider').value;show('alt-status','Retrieving source information…');try{if(provider==='pubchem'){let d=await request('/api/pubchem/'+encodeURIComponent(gene)+'/assays');const node=$('alt-status');node.replaceChildren();node.className='status';node.append(`Found ${d.assays.length} BioAssay records. These need manual endpoint harmonization. `);for(const x of d.assays.slice(0,25)){const l=document.createElement('a');l.href=x.download_url;l.target='_blank';l.rel='noopener';l.textContent=`AID ${x.aid}  `;node.append(l);}return;}const job=await jsonPost('/api/downloads',{provider,genes:[gene],endpoints:[$('target-endpoint').value],max_raw:0});poll(job.job_id,'alt-status',refreshDatasets);}catch(e){show('alt-status',e.message,'error');}}
+async function uploadCsv(){const file=$('csv-file').files[0];if(!file){show('upload-status','Choose a CSV first.','error');return;}show('upload-status','Auditing structures and measurements…');let form=new FormData();form.append('file',file);try{let result=await request('/api/datasets',{method:'POST',body:form});show('upload-status',`Imported: ${result.curated_assay_compound_pairs} curated pairs, ${result.unique_scaffolds} scaffolds, ${result.unique_assays} assays.\nDataset ID: ${result.id}`,'ok');await refreshDatasets();$('exp-dataset').value=result.id;}catch(e){show('upload-status',e.message,'error');}}
+function config(){const models=values('v-model'),variants=values('v-variant');if(!models.length||!variants.length)throw Error('Choose models and ablation variants');const layers=$('exp-layers').value.split(/[\s,]+/).filter(Boolean).map(Number);return{dataset_id:$('exp-dataset').value,task:$('exp-task').value,strategy:$('exp-strategy').value,folds:+$('exp-folds').value,seeds:seeds('exp-seeds'),models,variants,activity_threshold:+$('exp-threshold').value,n_estimators:+$('exp-trees').value,min_samples_leaf:+$('exp-leaf').value,fp_bits:+$('exp-bits').value,fp_radius:+$('exp-radius').value,mlp_layers:layers,mlp_max_iter:+$('exp-maxiter').value,mlp_lr:+$('exp-lr').value,mlp_alpha:+$('exp-alpha').value,svr_c:+$('exp-c').value,knn_neighbors:+$('exp-knn').value,alpha:+$('exp-conformal').value};}
+async function experiment(){try{let c=config();if(!c.dataset_id)throw Error('Choose a dataset first');if(c.models.length*c.variants.length*c.seeds.length*c.folds>200)throw Error('Maximum 200 total model fits');show('exp-status','Queuing grouped cross-validation…');let job=await jsonPost('/api/v2/experiments',c);poll(job.job_id,'exp-status',async d=>{await refreshRuns();await openRun(d.run_id);});}catch(e){show('exp-status',e.message,'error');}}
+async function refreshPlugins(){try{let d=await request('/api/v2/custom-models');state.plugins=d.models;$('docker-status').textContent=d.runtime.docker_cli?'Docker CLI detected':'Docker required';$('custom-model').replaceChildren(new Option('Choose a registered model',''),...d.models.map(x=>new Option(x.filename+' · '+x.id.slice(0,7),x.id)));}catch(e){show('custom-status',e.message,'error');}}
+async function uploadPlugin(){const f=$('custom-file').files[0];if(!f){show('custom-upload-status','Choose a .py or .ipynb file.','error');return;}let data=new FormData();data.append('file',f);try{const v=await request('/api/v2/custom-models',{method:'POST',body:data});show('custom-upload-status',`Registered model: ${v.filename} (${v.id}). Code stored but not executed. Docker setup required to run.`, 'ok');await refreshPlugins();$('custom-model').value=v.id;}catch(e){show('custom-upload-status',e.message,'error');}}
+async function customExperiment(){try{const cfg={model_id:$('custom-model').value,dataset_id:$('custom-dataset').value,task:$('custom-task').value,strategy:$('custom-strategy').value,folds:+$('custom-folds').value,seeds:seeds('custom-seeds'),activity_threshold:+$('custom-threshold').value,variants:['chemistry']};if(!cfg.model_id||!cfg.dataset_id)throw Error('Choose both a custom model and a dataset');show('custom-status','Starting Docker-isolated model evaluation…');let job=await jsonPost('/api/v2/custom-experiments',cfg);poll(job.job_id,'custom-status',d=>{const node=$('custom-status');let a=document.createElement('a');a.href='/api/v2/custom-experiments/'+d.run_id+'/bundle';a.textContent='Download custom-model CV report ZIP ↓';node.appendChild(document.createElement('br'));node.appendChild(a);});}catch(e){show('custom-status',e.message,'error');}}
+function load3dmol(){return new Promise((resolve,reject)=>{if(window.$3Dmol){resolve();return;}const script=document.createElement('script');script.src='https://3Dmol.org/build/3Dmol-min.js';script.onload=()=>window.$3Dmol?resolve():reject(new Error('3D viewer unavailable'));script.onerror=()=>reject(new Error('3Dmol library could not load. Internet access is required.'));document.head.appendChild(script);});}
+async function displayStructure(payload,format){try{await load3dmol();const el=$('structure-viewer');el.replaceChildren();let viewer=window.$3Dmol.createViewer(el,{backgroundColor:'#0d2130'});viewer.addModel(payload,format);viewer.setStyle({stick:{radius:.16},cartoon:{color:'spectrum'}});if(format==='pdb')viewer.setStyle({cartoon:{color:'spectrum'},hetatm:{stick:{}}});else viewer.setStyle({stick:{radius:.18}});viewer.zoomTo();viewer.render();$('view-engine-status').textContent='3Dmol · Interactive';}catch(e){$('structure-viewer').textContent=e.message;}}
+async function loadProtein(){const id=$('pdb-id').value.trim().toUpperCase();$('structure-viewer').textContent='Loading deposited structure from RCSB…';try{const pdb=await request('/api/v2/structures/'+encodeURIComponent(id));displayStructure(pdb,'pdb');}catch(e){$('structure-viewer').textContent=e.message;}}
+async function loadLigand(){let s=$('dock-smiles').value;try{const v=await jsonPost('/api/v2/docking/conformer',{smiles:s});displayStructure(v.sdf,'sdf');}catch(e){$('structure-viewer').textContent=e.message;}}
+async function prepareLigand(){show('dock-status','Preparing ligand conformer and PDBQT…');try{const result=await jsonPost('/api/v2/docking/prepare-ligand',{smiles:$('dock-smiles').value});show('dock-status','Ligand PDBQT prepared. Check protonation and torsion assignments before docking.','ok');const a=document.createElement('a');a.href='/api/v2/docking/prepared/'+result.id;a.textContent='Download prepared ligand PDBQT ↓';$('dock-status').appendChild(document.createElement('br'));$('dock-status').append(a);}catch(e){show('dock-status',e.message,'error');}}
+async function runDock(){const rec=$('dock-receptor').files[0],lig=$('dock-ligand').files[0];if(!rec||!lig){show('dock-status','Upload both prepared receptor and ligand PDBQT files.','error');return;}let fd=new FormData();fd.append('receptor',rec);fd.append('ligand',lig);for(const [key,id] of Object.entries({center_x:'dock-cx',center_y:'dock-cy',center_z:'dock-cz',size_x:'dock-sx',size_y:'dock-sy',size_z:'dock-sz',exhaustiveness:'dock-exhaust',seed:'dock-seed'})){fd.append(key,$(id).value);}show('dock-status','Running Vina; the browser will remain responsive after the call completes…');try{let r=await request('/api/v2/docking/run',{method:'POST',body:fd});show('dock-status',`Docking complete.\n${r.raw_stdout_tail}\nDocking scores are not experimentally measured affinities.`,'ok');$('dock-download').className='status ok';$('dock-download').innerHTML=`<a href="/api/v2/docking/${encodeURIComponent(r.id)}/poses">Download predicted poses (.pdbqt) ↓</a>`;}catch(e){show('dock-status',e.message,'error');}}
+async function init(){try{const [catalog,data,runs]=await Promise.all([request('/api/v2/catalog'),request('/api/datasets'),request('/api/v2/experiments')]);state.catalog=catalog.targets;state.models=catalog.models;state.datasets=data;state.runs=runs;$('dash-datasets').textContent=fmt(data.length);$('dash-runs').textContent=fmt(runs.length);$('dash-targets').textContent=fmt(state.catalog.length);$('dash-models').textContent=fmt(new Set([...state.models.classification,...state.models.regression]).size);$('conn-text').textContent='Connected to local server';$('vina-status').textContent=catalog.docking.vina?'Vina available':'Vina optional · not installed';$('view-engine-status').textContent='3Dmol / CDN';$('alt-gene').replaceChildren(...state.catalog.map(x=>new Option(x.gene,x.gene)));populateDatasets();renderCatalog();cardOptions(catalog.ablations,$('variant-choices'),'v-variant',['chemistry']);updateModels();refreshPlugins();refreshRuns();refreshDatasets();}catch(e){$('conn-text').textContent='Server API error';$('conn-dot').classList.add('off');console.error(e);show('upload-status','Frontend could not initialize: '+e.message,'error');navigate('datasets');}}
+$$('[data-page]').forEach(n=>n.onclick=()=>navigate(n.dataset.page));$$('[data-open]').forEach(n=>n.onclick=()=>navigate(n.dataset.open));
+$('catalog-filter').onchange=renderCatalog;$('protein-search-btn').onclick=targetSearch;$('target-download-btn').onclick=downloadTarget;$('alt-download-btn').onclick=altDownload;$('upload-btn').onclick=uploadCsv;$('refresh-data-btn').onclick=refreshDatasets;
+$('exp-task').onchange=updateModels;$('exp-folds').onchange=estimate;$('exp-seeds').oninput=estimate;$('run-exp-btn').onclick=experiment;$('custom-upload-btn').onclick=uploadPlugin;$('custom-run-btn').onclick=customExperiment;
+$('load-protein').onclick=loadProtein;$('load-ligand').onclick=loadLigand;$('ligand-prepare-btn').onclick=prepareLigand;$('dock-run-btn').onclick=runDock;$('refresh-runs-btn').onclick=refreshRuns;
+
+const dtiState={datasets:[],catalog:null,runs:[]};
+function dtiUpdateEstimate(){
+ const fits=(+$('dti-folds').value)*(seeds('dti-seeds').length)*values('dti-model').length*values('dti-ablation').length;
+ $('dti-fit-count').textContent=fits+' model fits'+(fits>200?' · reduce selection':'');
+}
+function dtiOptionChoices(options,parent,name,defaults){
+ parent.replaceChildren();
+ for(const item of options){
+  const label=document.createElement('label');label.className='choice';
+  const cb=document.createElement('input');cb.type='checkbox';cb.name=name;cb.value=item;cb.checked=defaults.includes(item);cb.onchange=dtiUpdateEstimate;
+  const title=document.createElement('span');title.textContent=item.replaceAll('_',' ');
+  label.append(cb,title);parent.append(label);
+ }
+}
+function dtiModels(){
+ if(!dtiState.catalog)return;
+ const task=$('dti-task').value;
+ const pool=dtiState.catalog.models[task];const suggested=hubState.catalog?.models?.dti?.[task]||pool;const models=suggested.filter(x=>pool.includes(x));
+ dtiOptionChoices(models,$('dti-models'),'dti-model',['extra_trees','random_forest']);
+ $('dti-threshold').disabled=task!=='classification';
+ dtiUpdateEstimate();
+}
+async function dtiRefresh(){
+ try{
+  const [catalog,datasets,runs,old]=await Promise.all([
+   request('/api/v3/dti/catalog'),request('/api/v3/dti/datasets'),request('/api/v3/dti/experiments'),request('/api/datasets')]);
+  dtiState.catalog=catalog;dtiState.datasets=datasets;dtiState.runs=runs;
+  const oldDataset=$('dti-dataset').value;
+  $('dti-dataset').replaceChildren(new Option('Select a multi-target dataset',''),...datasets.map(d=>new Option(`${d.curated_pairs} pairs · ${d.unique_targets} proteins · ${d.id.slice(0,8)}`,d.id)));
+  if(datasets.some(x=>x.id===oldDataset))$('dti-dataset').value=oldDataset;
+  const tbody=$('dti-dataset-table');tbody.replaceChildren();
+  if(!datasets.length){const tr=document.createElement('tr');const td=document.createElement('td');td.colSpan=6;td.textContent='No multi-target datasets yet. Upload a CSV or combine individual enzyme datasets.';tr.append(td);tbody.append(tr);}
+  for(const d of datasets){const tr=document.createElement('tr');
+   for(const value of [d.id.slice(0,10),d.curated_pairs,d.unique_drugs,d.unique_protein_sequences,d.endpoint]){const td=document.createElement('td');td.textContent=value;tr.append(td);}
+   const td=document.createElement('td');const a=document.createElement('a');a.href='/api/v3/dti/datasets/'+d.id+'/csv';a.textContent='CSV ↓';td.append(a);tr.append(td);tbody.append(tr);
+  }
+  $('dti-merge-choices').replaceChildren();
+  for(const d of old){const label=document.createElement('label');label.className='choice';
+   const cb=document.createElement('input');cb.type='checkbox';cb.name='dti-merge-id';cb.value=d.id;
+   const span=document.createElement('span');span.textContent=(d.target||d.origin?.gene||'Target')+' · '+(d.endpoint||'—')+' · '+d.id.slice(0,7);
+   label.append(cb,span);$('dti-merge-choices').append(label);
+  }
+  const rows=$('dti-results-table');rows.replaceChildren();
+  if(!runs.length){const tr=document.createElement('tr');const td=document.createElement('td');td.colSpan=5;td.textContent='No runs yet';tr.append(td);rows.append(tr);}
+  for(const r of runs.slice(0,15)){const tr=document.createElement('tr');
+   for(const value of [r.id.slice(0,12),r.strategy,r.task,r.n_fits]){const td=document.createElement('td');td.textContent=value;tr.append(td);}
+   const td=document.createElement('td');const a=document.createElement('a');a.href='/api/v3/dti/experiments/'+r.id+'/bundle';a.textContent='Download ZIP ↓';td.append(a);tr.append(td);rows.append(tr);
+  }
+  if(!$('dti-variants').children.length)dtiOptionChoices(catalog.ablations,$('dti-variants'),'dti-ablation',['joint','no_cross_features']);
+  dtiModels();
+ }catch(err){show('dti-upload-status',err.message,'error');}
+}
+async function dtiUpload(){
+ try{const f=$('dti-csv').files[0];if(!f)throw Error('Choose a multi-target CSV first');
+  const form=new FormData();form.append('file',f);show('dti-upload-status','Auditing molecular identities, target sequences, and pair measurements…');
+  const result=await request('/api/v3/dti/datasets',{method:'POST',body:form});
+  await dtiRefresh();$('dti-dataset').value=result.id;
+  show('dti-upload-status',`Imported ${result.curated_pairs} pairs across ${result.unique_drugs} drugs and ${result.unique_protein_sequences} unique protein sequences. Dataset ${result.id}`,'ok');
+ }catch(err){show('dti-upload-status',err.message,'error');}
+}
+async function dtiMerge(){
+ try{const dataset_ids=values('dti-merge-id');if(dataset_ids.length<2)throw Error('Select at least two single-target datasets with a common endpoint');
+  show('dti-merge-status','Retrieving protein FASTA sequences and auditing combined interaction pairs…');
+  const result=await jsonPost('/api/v3/dti/datasets/merge',{dataset_ids});
+  await dtiRefresh();$('dti-dataset').value=result.id;
+  show('dti-merge-status',`Created multi-target dataset with ${result.unique_targets} target IDs and ${result.curated_pairs} drug–protein pairs.`,'ok');
+ }catch(err){show('dti-merge-status',err.message,'error');}
+}
+async function dtiRun(){
+ try{
+  const layers=$('dti-layers').value.split(/[\s,]+/).filter(Boolean).map(Number);
+  const requestData={dataset_id:$('dti-dataset').value,task:$('dti-task').value,strategy:$('dti-strategy').value,
+    folds:+$('dti-folds').value,seeds:seeds('dti-seeds'),models:values('dti-model'),variants:values('dti-ablation'),
+    activity_threshold:+$('dti-threshold').value,fp_bits:+$('dti-bits').value,n_estimators:+$('dti-trees').value,
+    mlp_layers:layers,mlp_max_iter:+$('dti-iterations').value,mlp_lr:+$('dti-lr').value};
+  if(!requestData.dataset_id)throw Error('Import and select a multi-target dataset');
+  if(!requestData.models.length||!requestData.variants.length)throw Error('Select models and ablations');
+  if(requestData.folds*requestData.seeds.length*requestData.models.length*requestData.variants.length>200)throw Error('Maximum 200 fitted models per DTI experiment');
+  show('dti-run-status','Creating entity-disjoint folds and training pairwise models…');
+  const job=await jsonPost('/api/v3/dti/experiments',requestData);
+  poll(job.job_id,'dti-run-status',async data=>{
+    await dtiRefresh();
+    const node=$('dti-results');node.className='status ok';node.replaceChildren();
+    node.append(`Completed ${data.n_fits} fits. `);
+    const a=document.createElement('a');a.href='/api/v3/dti/experiments/'+data.run_id+'/bundle';a.textContent='Download all metrics, split assignments, predictions, and provenance ↓';node.append(a);
+  });
+ }catch(err){show('dti-run-status',err.message,'error');}
+}
+$('dti-upload').onclick=dtiUpload;
+$('dti-merge').onclick=dtiMerge;
+$('dti-run').onclick=dtiRun;
+$('dti-refresh').onclick=dtiRefresh;
+$('dti-task').onchange=dtiModels;
+$('dti-folds').onchange=dtiUpdateEstimate;
+$('dti-seeds').oninput=dtiUpdateEstimate;
+
+
+const pairState={ddi:{datasets:[],runs:[]},ppi:{datasets:[],runs:[]},catalog:null};
+const pairPath=kind=>'/api/v4/pairs/'+kind;
+function pairFolds(kind){try{let m=values(kind+'-models').length,v=values(kind+'-variants').length;let ss=seeds(kind+'-seeds');let fits=m*v*ss.length*(+$(kind+'-folds').value);$(kind+'-fits').textContent=fits+' fits'+(fits>150?' · reduce selection':'');}catch(e){$(kind+'-fits').textContent=e.message;}}
+function pairCheckOptions(parent,group,options,defaults,kind){parent.replaceChildren(...options.map(x=>{const l=document.createElement('label');l.className='choice';const cb=document.createElement('input');cb.type='checkbox';cb.name=group;cb.value=x;cb.checked=defaults.includes(x);cb.onchange=()=>pairFolds(kind);const t=document.createElement('span');t.textContent=x.replaceAll('_',' ');l.append(cb,t);return l;}));}
+async function pairEnsure(){if(pairState.catalog)return pairState.catalog;pairState.catalog=await request('/api/v4/pairs/catalog');for(const kind of ['ddi','ppi']){pairCheckOptions($(kind+'-ablations'),kind+'-variants',pairState.catalog.variants,['joint','no_cross_features'],kind);pairModels(kind);}return pairState.catalog;}
+function pairModels(kind){const pool=pairState.catalog?.models?.[$(kind+'-task').value]||[];const preset=hubState.catalog?.models?.[kind]?.[$(kind+'-task').value]||pool;const all=preset.filter(m=>pool.includes(m));pairCheckOptions($(kind+'-model-choices'),kind+'-models',all,['random_forest','ann_mlp'],kind);}
+function pairGraph(el,net){el.replaceChildren();const nodes=net.preview_nodes.slice(0,50);const map=new Map(nodes.map((n,i)=>[n.id,i]));const svg=document.createElementNS('http://www.w3.org/2000/svg','svg');svg.setAttribute('viewBox','0 0 740 350');svg.setAttribute('role','img');svg.setAttribute('aria-label','Observed interaction network');const position=nodes.map((n,i)=>{const theta=(i*2.39996323),r=22+Math.sqrt(i/Math.max(1,nodes.length))*140;return [370+r*Math.cos(theta)*1.75,175+r*Math.sin(theta)]});for(const e of net.preview_edges){if(!map.has(e.source)||!map.has(e.target))continue;const [x1,y1]=position[map.get(e.source)], [x2,y2]=position[map.get(e.target)];const line=document.createElementNS('http://www.w3.org/2000/svg','line');line.setAttribute('x1',x1);line.setAttribute('y1',y1);line.setAttribute('x2',x2);line.setAttribute('y2',y2);line.setAttribute('class','edge');svg.append(line);}nodes.forEach((node,i)=>{const [x,y]=position[i];const circle=document.createElementNS('http://www.w3.org/2000/svg','circle');circle.setAttribute('cx',x);circle.setAttribute('cy',y);circle.setAttribute('r',Math.min(10,3.5+Math.sqrt(node.degree)));circle.setAttribute('class','node');const title=document.createElementNS('http://www.w3.org/2000/svg','title');title.textContent=node.id+' · '+node.degree+' recorded links';circle.append(title);svg.append(circle);});el.append(svg);}
+async function pairRefresh(kind){try{await pairEnsure();const [datasets,runs]=await Promise.all([request(pairPath(kind)+'/datasets'),request(pairPath(kind)+'/runs')]);pairState[kind].datasets=datasets;pairState[kind].runs=runs;const picker=$(kind+'-dataset'),before=picker.value;picker.replaceChildren(new Option('Select interaction dataset',''),...datasets.map(d=>new Option(d.origin&&typeof d.origin==='string'?d.origin+' · '+d.curated_pairs+' pairs':d.id.slice(0,8)+' · '+d.curated_pairs+' pairs',d.id)));if(datasets.some(x=>x.id===before))picker.value=before;else if(datasets.length)picker.value=datasets[0].id;const tb=$(kind+'-table');tb.replaceChildren();for(const d of datasets){const tr=document.createElement('tr');tr.innerHTML='<td>'+clean(d.id.slice(0,10))+(d.synthetic_demo?' · DEMO':'')+'</td><td>'+fmt(d.curated_pairs)+'</td><td>'+fmt(d.unique_entities)+'</td><td>'+fmt(d.connected_components)+'</td><td><a href="'+pairPath(kind)+'/datasets/'+d.id+'/csv">CSV ↓</a> · <a href="'+pairPath(kind)+'/datasets/'+d.id+'/excluded.csv">Audit ↓</a></td>';tb.append(tr);}if(!datasets.length)tb.innerHTML='<tr><td colspan="5">Upload a labeled pairwise CSV or load a demonstration dataset.</td></tr>';const rt=$(kind+'-run-table');rt.replaceChildren();for(const r of runs){const tr=document.createElement('tr');tr.innerHTML='<td>'+clean(r.id.slice(0,10))+'</td><td>'+clean(r.strategy)+'</td><td>'+clean(r.task)+'</td><td>'+fmt(r.n_fits)+'</td><td><a href="'+pairPath(kind)+'/runs/'+r.id+'/bundle">Research package ↓</a></td>';rt.append(tr);}if(!runs.length)rt.innerHTML='<tr><td colspan="5">No experiments yet</td></tr>';if(picker.value)await pairLoadGraph(kind);pairFolds(kind);}catch(e){show(kind+'-import-status','Could not load '+kind.toUpperCase()+' research module: '+e.message,'error');}}
+async function pairLoadGraph(kind){const id=$(kind+'-dataset').value;if(!id)return;try{const v=await request(pairPath(kind)+'/datasets/'+id+'/graph');const net=v.network;$(kind+'-nodes').textContent=fmt(net.nodes);$(kind+'-edges').textContent=fmt(net.edges);$(kind+'-components').textContent=fmt(net.connected_components);$(kind+'-density').textContent=net.density;pairGraph($(kind+'-graph'),net);if(v.audit.positive_only)show(kind+'-graph-status','This dataset contains only observed positive edges. Predictive binary classification requires documented negatives.','error');else if(!v.audit.protein_sequence_complete)show(kind+'-graph-status','Protein sequences are missing; network analysis is supported, but model training requires sequences.','error');else $(kind+'-graph-status').className='status hidden';}catch(e){show(kind+'-graph-status',e.message,'error');}}
+async function pairUpload(kind,file){if(!file){show(kind+'-import-status','Select a CSV file.','error');return;}const data=new FormData();data.append('file',file);show(kind+'-import-status','Auditing pairs and measuring network connectivity…');try{const d=await request(pairPath(kind)+'/datasets',{method:'POST',body:data});show(kind+'-import-status',`Imported ${d.curated_pairs} ${kind.toUpperCase()} pairs; ${d.unique_entities} entities; ${d.excluded_rows} exclusions.`,'ok');await pairRefresh(kind);$(kind+'-dataset').value=d.id;await pairLoadGraph(kind);}catch(e){show(kind+'-import-status',e.message,'error');}}
+async function pairDemo(kind){try{const res=await fetch(pairPath(kind)+'/example.csv');if(!res.ok)throw Error('Example unavailable');await pairUpload(kind,new File([await res.blob()],'synthetic_'+kind+'_pairs.csv',{type:'text/csv'}));}catch(e){show(kind+'-import-status',e.message,'error');}}
+async function pairPoll(job,element,kind){for(let i=0;i<180;i++){await new Promise(r=>setTimeout(r,1100));const j=await request('/api/v4/jobs/'+job);show(element,j.state.toUpperCase()+'\n'+j.message,j.state==='error'?'error':j.state==='complete'?'ok':'');if(j.state!=='queued'&&j.state!=='running'){if(j.state==='complete'){await pairRefresh(kind);if(j.dataset_id){$(kind+'-dataset').value=j.dataset_id;await pairLoadGraph(kind);}if(j.run_id){const box=$(kind+'-run-results');box.className='status ok';box.replaceChildren('Completed '+j.n_fits+' fits. ');const link=document.createElement('a');link.href=pairPath(kind)+'/runs/'+j.run_id+'/bundle';link.textContent='Download fold metrics, predictions, split audit and network figure ↓';box.append(link);}}return;}}show(element,'Job still running. Check results after it completes.','error');}
+async function pairRun(kind){try{const dataset_id=$(kind+'-dataset').value;if(!dataset_id)throw Error('Select an interaction dataset first');const models=values(kind+'-models'),variants=values(kind+'-variants');if(!models.length||!variants.length)throw Error('Select models and ablations');const req={dataset_id,task:$(kind+'-task').value,strategy:$(kind+'-strategy').value,folds:+$(kind+'-folds').value,seeds:seeds(kind+'-seeds'),models,variants,fp_bits:+$(kind+'-bits').value,fp_radius:+$(kind+'-radius').value,n_estimators:+$(kind+'-trees').value,min_samples_leaf:+$(kind+'-leaf').value,regularization:+$(kind+'-regularization').value,mlp_layers:$(kind+'-layers').value.split(/[,\s]+/).filter(Boolean).map(Number),mlp_lr:+$(kind+'-lr').value,mlp_max_iter:+$(kind+'-iterations').value};show(kind+'-run-status','Validating partition integrity and preparing training…');const job=await jsonPost(pairPath(kind)+'/experiments',req);await pairPoll(job.job_id,kind+'-run-status',kind);}catch(e){show(kind+'-run-status',e.message,'error');}}
+async function importString(){try{const genes=$('ppi-string-genes').value.split(/[\s,;]+/).filter(Boolean);const job=await jsonPost('/api/v4/ppi/string/import',{genes,species:+$('ppi-string-species').value,network_type:$('ppi-string-type').value,required_score:+$('ppi-string-score').value});show('ppi-string-status','Downloading network…');await pairPoll(job.job_id,'ppi-string-status','ppi');}catch(e){show('ppi-string-status',e.message,'error');}}
+for(const kind of ['ddi','ppi']){$(kind+'-upload').onclick=()=>pairUpload(kind,$(kind+'-file').files[0]);$(kind+'-demo').onclick=()=>pairDemo(kind);$(kind+'-dataset').onchange=()=>pairLoadGraph(kind);$(kind+'-run').onclick=()=>pairRun(kind);$(kind+'-refresh').onclick=()=>pairRefresh(kind);$(kind+'-task').onchange=()=>pairModels(kind);$(kind+'-folds').onchange=()=>pairFolds(kind);$(kind+'-seeds').oninput=()=>pairFolds(kind);}
+$('ppi-string-download').onclick=importString;
+
+
+const hubState={catalog:null,kind:'dti',activeJob:null};
+async function hubRefresh(){
+ try{
+  if(!hubState.catalog)hubState.catalog=await request('/api/v5/catalog');
+  hubRender();
+ }catch(e){show('hub-status','The dataset hub could not initialize: '+e.message,'error');}
+}
+function hubSelect(kind){
+ if(!['dti','ddi','ppi'].includes(kind))return;
+ hubState.kind=kind;
+ document.querySelectorAll('[data-hub]').forEach(b=>b.classList.toggle('active',b.dataset.hub===kind));
+ if(hubState.catalog)hubRender();
+}
+function hubRender(){
+ const k=hubState.kind, catalog=hubState.catalog, preset=catalog.models[k];
+ $('hub-task-tag').textContent=k.toUpperCase();
+ const descriptions={
+  dti:'SMILES + protein sequences · Binding affinity / target-response observations',
+  ddi:'Structured molecular-pair event records · Observational labels are not automatically interaction/noninteraction evidence',
+  ppi:'Binary protein associations · Protein sequence representations and optional control-pair generation'
+ };
+ $('hub-title').textContent=k.toUpperCase()+' source catalog';
+ $('hub-intro').textContent=descriptions[k];
+ $('hub-features').textContent=preset.features;
+ $('hub-validation').textContent='Supported validation: '+preset.validation.join(' · ')+' · Group overlap audited per fold.';
+ $('hub-prediction').value=k==='dti'?'regression':'classification';
+ const type=$('hub-prediction').value;
+ hubModelChoices(preset[type],preset.default);
+ $('hub-neg').disabled=k!=='ppi';
+ const holder=$('hub-resources');holder.replaceChildren();
+ for(const res of catalog.resources.filter(x=>x.kind===k)){
+  const card=document.createElement('article');card.className='source-card';
+  const header=document.createElement('header');
+  const name=document.createElement('h3');name.textContent=res.title;
+  const tag=document.createElement('span');tag.className='source-tag';tag.textContent=res.provider.toUpperCase();
+  header.append(name,tag);
+  const info=document.createElement('div');info.className='description';info.textContent=res.explanation;
+  const note=document.createElement('div');note.className='note';note.textContent=res.license_note;
+  const footer=document.createElement('footer');
+  const link=document.createElement('a');link.href=res.source_url;link.target='_blank';link.rel='noopener noreferrer';link.textContent='Source documentation ↗';
+  footer.append(link);
+  if(res.availability==='automatic'||res.availability==='raw_only'){
+   const action=document.createElement('button');action.className='btn small';action.type='button';action.textContent=res.availability==='raw_only'?'Export raw data':'Download and import';
+   action.onclick=()=>hubDownload(res.key);
+   footer.append(action);
+  }else{
+   const flag=document.createElement('span');flag.className='tag';flag.textContent=res.availability.replaceAll('_',' ');footer.append(flag);
+   if(res.key==='ppi_string'){
+    const go=document.createElement('button');go.className='btn secondary small';go.textContent='Open PPI networks';go.onclick=()=>navigate('ppi');footer.append(go);
+   }
+  }
+  card.append(header,info,note,footer);holder.append(card);
+ }
+}
+function hubModelChoices(models,defaults){
+ const out=$('hub-model-list');out.replaceChildren();
+ for(const name of models){
+  const row=document.createElement('label');row.className='choice';
+  const input=document.createElement('input');input.type='checkbox';input.value=name;input.checked=defaults.includes(name);
+  const span=document.createElement('span');span.textContent=name.replaceAll('_',' ');row.append(input,span);out.append(row);
+ }
+}
+async function hubDownload(resource_key){
+ try{
+  const neg=($('hub-neg').value==='yes');
+  show('hub-status','Preparing your dataset request…');$('hub-filelinks').replaceChildren();
+  const started=await jsonPost('/api/v5/datasets/download',{
+   resource_key,max_rows:Number($('hub-limit').value),random_seed:Number($('hub-seed').value),ppi_reference_negatives:neg
+  });
+  hubState.activeJob=started.job_id;
+  for(let i=0;i<300;i++){
+   await new Promise(r=>setTimeout(r,1500));
+   const j=await request('/api/v5/datasets/jobs/'+started.job_id);
+   show('hub-status',j.state.toUpperCase()+'\n'+j.message+(j.warning?'\n'+j.warning:''),j.state==='error'?'error':j.state==='complete'?'ok':'');
+   if(j.state==='complete'){
+    const csv=document.createElement('a');csv.className='btn';csv.href='/api/v5/datasets/jobs/'+started.job_id+'/csv';csv.textContent='Download dataset CSV ↓';
+    const manifest=document.createElement('a');manifest.className='btn secondary';manifest.href='/api/v5/datasets/jobs/'+started.job_id+'/manifest';manifest.textContent='Provenance manifest ↓';
+    $('hub-filelinks').replaceChildren(csv,manifest);
+    if(j.imported){
+     if(j.manifest.kind==='dti')await dtiRefresh();
+     else if(j.manifest.kind==='ppi')await pairRefresh('ppi');
+    }
+    return;
+   }
+   if(j.state==='error')return;
+  }
+  show('hub-status','The download continues on the server. This browser session stopped polling; no research claims were generated.','error');
+ }catch(e){show('hub-status',e.message,'error');}
+}
+$$('[data-hub]').forEach(b=>b.onclick=()=>hubSelect(b.dataset.hub));
+$('hub-prediction').onchange=()=>{if(hubState.catalog){const x=hubState.catalog.models[hubState.kind];hubModelChoices(x[$('hub-prediction').value],x.default);}};
+$('hub-open-workflow').onclick=()=>navigate(hubState.kind);
+
+
+async function huriDownload(){
+ try{
+  const include_reference_controls=$('huri-neg').value==='yes';
+  const max_rows=Number($('huri-limit').value);
+  show('huri-status','Retrieving and auditing HuRI protein interaction records…');
+  $('huri-files').replaceChildren();
+  const r=await jsonPost('/api/v5/ppi/huri',{max_rows,seed:42,include_reference_controls});
+  for(let n=0;n<240;n++){
+   await new Promise(res=>setTimeout(res,1500));
+   const status=await request('/api/v5/ppi/jobs/'+r.job_id);
+   show('huri-status',status.state.toUpperCase()+'\n'+status.message,status.state==='error'?'error':status.state==='complete'?'ok':'');
+   if(status.state==='error')return;
+   if(status.state==='complete'){
+    const a=document.createElement('a');a.href='/api/v5/ppi/jobs/'+r.job_id+'/csv';a.textContent='Download protein-pair CSV ↓';a.className='btn small';
+    const b=document.createElement('a');b.href='/api/v5/ppi/jobs/'+r.job_id+'/manifest';b.textContent='Download provenance manifest ↓';b.className='btn secondary small';
+    $('huri-files').replaceChildren(a,b);
+    await pairRefresh('ppi');
+    if(status.dataset_id){$('ppi-dataset').value=status.dataset_id;await pairLoadGraph('ppi');}
+    return;
+   }
+  }
+  show('huri-status','Dataset preparation is still running. Check the local server log.','error');
+ }catch(e){show('huri-status',e.message,'error');}
+}
+$('huri-download').onclick=huriDownload;
+
+init();
+</script></body></html>

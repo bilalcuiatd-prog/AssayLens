@@ -1,0 +1,40 @@
+{
+  "source": "examples/synthetic_assay_demo.csv",
+  "seeds": [
+    7,
+    17
+  ],
+  "splits": [
+    "scaffold",
+    "assay"
+  ],
+  "models": [
+    "chemistry_only",
+    "chemistry_assay",
+    "chemistry_assay_weighted"
+  ],
+  "errors": [],
+  "audit": {
+    "input_rows": 335,
+    "valid_unique_measurements": 333,
+    "curated_assay_compound_pairs": 325,
+    "unique_parent_structures": 255,
+    "unique_scaffolds": 15,
+    "unique_assays": 16,
+    "fragment_changes": 0,
+    "cross_assay_conflict_pairs": 0,
+    "within_assay_conflict_pairs_excluded": 0,
+    "reason_counts": {
+      "accepted": 333,
+      "invalid_smiles": 1,
+      "invalid_response": 1
+    },
+    "endpoint": "SYNTHETIC_SIGNAL",
+    "target": "SYNTHETIC_TARGET",
+    "warnings": [
+      "No measurement relation column: assumes provided responses are exact; exclude censored values upstream",
+      "No source validity-comment column: experimental data validity must be assessed upstream"
+    ],
+    "conflict_span_units": 1.0
+  }
+}
